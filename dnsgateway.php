@@ -532,8 +532,13 @@ function dnsgateway_RegisterDomain($params) {
 	$RegistrantPostalCode = $params["postcode"];
 	$RegistrantCountry = $params["country"];
 	$RegistrantEmailAddress = $params["email"];
-	$RegistrantPhone = $params["phonenumber"];
-	
+
+	if (isset($params["phonenumberformatted"])) { // To deal with WHMCS 7.4.2 phone number change
+	    $RegistrantPhone = $params["phonenumberformatted"];
+	} else {
+	    $RegistrantPhone = $params["phonenumber"];
+	}
+
 	# Admin Details
 	$AdminFirstName = $params["adminfirstname"];
 	$AdminLastName = $params["adminlastname"];
@@ -544,7 +549,12 @@ function dnsgateway_RegisterDomain($params) {
 	$AdminPostalCode = $params["adminpostcode"];
 	$AdminCountry = $params["admincountry"];
 	$AdminEmailAddress = $params["adminemail"];
-	$AdminPhone = $params["adminphonenumber"];
+
+	if (isset($params["adminfullphonenumber"])) { // To deal with WHMCS 7.4.2 phone number change
+	    $AdminPhone = $params["adminfullphonenumber"];
+	} else {
+	    $AdminPhone = $params["adminphonenumber"];
+	}
 	
 	$RegistrantFields = array(
 		"phone" => $RegistrantPhone, 
