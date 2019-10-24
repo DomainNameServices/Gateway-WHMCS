@@ -1,0 +1,24 @@
+{
+  "schema": "1.0",
+  "type": "whmcs-registrars",
+  "name": "dns_gateway",
+  "license": "proprietary",
+  "category": "domains",
+  "description": {
+    "name": "DNS Gateway",
+    "tagline": "Domain Management for Registrars and Resellers for more than 250 extensions"
+  },
+  "logo": {
+    "filename": "logo.png"
+  },
+  "support": {
+    "docs_url": "https:\/\/portal.dns.business\/",
+    "email": "support@dns.business"
+  },
+  "authors": [
+    {
+      "name": "DNS Africa",
+      "homepage": "https:\/\/dns.business\/"
+    }
+  ]
+}
