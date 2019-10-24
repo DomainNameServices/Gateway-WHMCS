@@ -470,22 +470,32 @@ class DNSAPI {
         $return = curl_exec($process); // Run the cURL command
         //logModuleCall('DNSAPI', 'API CALL : ' . $method, $data, $return);
         $code = curl_getinfo($process, CURLINFO_HTTP_CODE);
+        $error_message = curl_error($process);
+        $error_code = curl_errno($process);
         curl_close($process); // Close the connection
         $results = json_decode($return, true); // Decode the JSON string to an associative array for processing
         
 
-
-        if ($code >= 300 && array_key_exists("message", $results)) {
-            throw new \Exception("Server error (" . $code . "): " . $results["message"]);
-        } else if (!array_key_exists("results", $results) && array_key_exists("message", $results) && $code >= 300) {
-            throw new \Exception("Server error (" . $code . "): " . $results["message"]);
-        } else if (!array_key_exists("results", $results) && array_key_exists("detail", $results) && $code >= 300) {
-            throw new \Exception("Server error (" . $code . "): " . $results["detail"]);
-        } else if ($code >= 300) {
-            throw new \Exception("Server error (" . $code . "): " . $return);
-        } else if ($code == 0) { 
-            throw new \Exception("Connection Error (0), URL: ".$url);
-        } 
+        try {
+            if ($code >= 300 && array_key_exists("message", $results)) {
+                throw new \Exception("Server error (" . $code . "): " . $results["message"]);
+            } else if (!array_key_exists("results", $results) && array_key_exists("message", $results) && $code >= 300) {
+                throw new \Exception("Server error (" . $code . "): " . $results["message"]);
+            } else if (!array_key_exists("results", $results) && array_key_exists("detail", $results) && $code >= 300) {
+                throw new \Exception("Server error (" . $code . "): " . $results["detail"]);
+            } else if ($code >= 300) {
+                throw new \Exception("Server error (" . $code . "): " . $return);
+            } else if ($code == 0) {
+                if ($error_code > 0)
+                    throw new \Exception("Connection Error (". $error_message ."), URL: " . $url);
+                else
+                    throw new \Exception("Connection Error (0), URL: " . $url);
+            }
+        }
+        catch (\Exception $e) {
+            logModuleCall('DNSAPI', 'API: CALL Error: ' .$error_code . ' ' . $error_message  , $data, $return);
+            throw $e;
+        }
 
         $results["success"] = true;
 
