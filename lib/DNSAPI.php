@@ -458,7 +458,7 @@ class DNSAPI {
         
         curl_setopt($process, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "Authorization: Basic " . base64_encode($this->username . ":" . $this->password))); // Set the data type to be JSON
         curl_setopt($process, CURLOPT_HEADER, 0);
-        curl_setopt($process, CURLOPT_TIMEOUT, 30); // The timeout for this connection attempt, if not results are received within 30 seconds, disconnect
+        curl_setopt($process, CURLOPT_TIMEOUT, 60); // The timeout for this connection attempt, if not results are received within 60 seconds, disconnect
         curl_setopt($process, CURLOPT_CUSTOMREQUEST, $method); // Let the invoker select the method
         // If method is GET then POSTFIELDS should be PARAMS
         curl_setopt($process, CURLOPT_POSTFIELDS, $jsonformat); // The payload we're sending to the server
@@ -470,22 +470,32 @@ class DNSAPI {
         $return = curl_exec($process); // Run the cURL command
         //logModuleCall('DNSAPI', 'API CALL : ' . $method, $data, $return);
         $code = curl_getinfo($process, CURLINFO_HTTP_CODE);
+        $error_message = curl_error($process);
+        $error_code = curl_errno($process);
         curl_close($process); // Close the connection
         $results = json_decode($return, true); // Decode the JSON string to an associative array for processing
         
 
-
-        if ($code >= 300 && array_key_exists("message", $results)) {
-            throw new \Exception("Server error (" . $code . "): " . $results["message"]);
-        } else if (!array_key_exists("results", $results) && array_key_exists("message", $results) && $code >= 300) {
-            throw new \Exception("Server error (" . $code . "): " . $results["message"]);
-        } else if (!array_key_exists("results", $results) && array_key_exists("detail", $results) && $code >= 300) {
-            throw new \Exception("Server error (" . $code . "): " . $results["detail"]);
-        } else if ($code >= 300) {
-            throw new \Exception("Server error (" . $code . "): " . $return);
-        } else if ($code == 0) { 
-            throw new \Exception("Connection Error (0), URL: ".$url);
-        } 
+        try {
+            if ($code >= 300 && array_key_exists("message", $results)) {
+                throw new \Exception("Server error (" . $code . "): " . $results["message"]);
+            } else if (!array_key_exists("results", $results) && array_key_exists("message", $results) && $code >= 300) {
+                throw new \Exception("Server error (" . $code . "): " . $results["message"]);
+            } else if (!array_key_exists("results", $results) && array_key_exists("detail", $results) && $code >= 300) {
+                throw new \Exception("Server error (" . $code . "): " . $results["detail"]);
+            } else if ($code >= 300) {
+                throw new \Exception("Server error (" . $code . "): " . $return);
+            } else if ($code == 0) {
+                if ($error_code > 0)
+                    throw new \Exception("Connection Error (". $error_message ."), URL: " . $url);
+                else
+                    throw new \Exception("Connection Error (0), URL: " . $url);
+            }
+        }
+        catch (\Exception $e) {
+            logModuleCall('DNSAPI', 'API: CALL Error: ' .$error_code . ' ' . $error_message  , $data, $return);
+            throw $e;
+        }
 
         $results["success"] = true;
 
