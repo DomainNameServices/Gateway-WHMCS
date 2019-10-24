@@ -458,7 +458,7 @@ class DNSAPI {
         
         curl_setopt($process, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "Authorization: Basic " . base64_encode($this->username . ":" . $this->password))); // Set the data type to be JSON
         curl_setopt($process, CURLOPT_HEADER, 0);
-        curl_setopt($process, CURLOPT_TIMEOUT, 30); // The timeout for this connection attempt, if not results are received within 30 seconds, disconnect
+        curl_setopt($process, CURLOPT_TIMEOUT, 60); // The timeout for this connection attempt, if not results are received within 60 seconds, disconnect
         curl_setopt($process, CURLOPT_CUSTOMREQUEST, $method); // Let the invoker select the method
         // If method is GET then POSTFIELDS should be PARAMS
         curl_setopt($process, CURLOPT_POSTFIELDS, $jsonformat); // The payload we're sending to the server
