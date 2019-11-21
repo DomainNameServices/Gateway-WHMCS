@@ -34,7 +34,7 @@ Upload the dns_gateway.zip on the registrars directory
 
 ##### Step 5 
 
-Reload the page to view the changes
+Reload the page to view the changes.
 
 
 

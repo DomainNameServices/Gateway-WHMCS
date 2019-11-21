@@ -70,9 +70,9 @@ class DNSAPI {
 
     public function setcontact($contact_info) {
         $url = $this->api_url . '/registry/contacts/';
-        logModuleCall('DNSAPI', 'setcontact', $contact_info, $url);
+        //logModuleCall('DNSAPI', 'setcontact', $contact_info, $url);
         $result = $this->call($url, $contact_info, "POST");
-        logModuleCall('DNSAPI', 'setcontact', $contact_info, $result);
+        //logModuleCall('DNSAPI', 'setcontact', $contact_info, $result);
         return $result['id'];
     }
 
@@ -83,9 +83,9 @@ class DNSAPI {
     public function update_contact($contact_info, $existing_id) {
         //  Check For Existing Contact
         $url = $this->api_url . '/registry/contacts/' . $existing_id . '/';
-        logModuleCall('DNSAPI', 'Pre : Update Contact', $contact_info, $url);
+        //logModuleCall('DNSAPI', 'Pre : Update Contact', $contact_info, $url);
         $result = $this->call($url, $contact_info, "PUT");
-        logModuleCall('DNSAPI', 'Update Contact', $contact_info, $result);
+        //logModuleCall('DNSAPI', 'Update Contact', $contact_info, $result);
         return true;
     }
 
@@ -95,9 +95,9 @@ class DNSAPI {
 
     public function contact_listing() {
         $url = $this->api_url . '/registry/contacts/';
-        logModuleCall('DNSAPI', 'Pre : Contact Listing', [], $result);
+        //logModuleCall('DNSAPI', 'Pre : Contact Listing', [], $result);
         $result = $this->call($url, [], "GET");
-        logModuleCall('DNSAPI', 'Contact Listing', [], $result);
+        //logModuleCall('DNSAPI', 'Contact Listing', [], $result);
         return $result['wid'];
     }
 
@@ -107,9 +107,9 @@ class DNSAPI {
 
     public function get_contact_wid($contact_id) {
         $url = $this->api_url . '/registry/contacts/?id=' . $contact_id;
-        logModuleCall('DNSAPI', 'Pre : Get Contact WID', ['id' => $contact_id], $url);
+        //logModuleCall('DNSAPI', 'Pre : Get Contact WID', ['id' => $contact_id], $url);
         $result = $this->call($url, [], "GET");
-        logModuleCall('DNSAPI', 'Get Contact WID', ['id' => $contact_id], $result);
+        //logModuleCall('DNSAPI', 'Get Contact WID', ['id' => $contact_id], $result);
         return $result['results'][0]['wid'];
     }
 
@@ -122,9 +122,9 @@ class DNSAPI {
         $wid = $this->get_contact_wid($contact_id);
         $url = $this->api_url . '/registry/contacts/' . $wid;
         
-        logModuleCall('DNSAPI', 'Pre : Contact Info', ['id' => $wid], $url);
+        //logModuleCall('DNSAPI', 'Pre : Contact Info', ['id' => $wid], $url);
         $result = $this->call($url, [], "GET");
-        logModuleCall('DNSAPI', 'Contact Info', ['id' => $wid], $result);
+        //logModuleCall('DNSAPI', 'Contact Info', ['id' => $wid], $result);
         
         return $result;
     }
@@ -135,9 +135,9 @@ class DNSAPI {
 
     public function contact_check($check, $contact_name = '') {
         $url = $this->api_url . '/registry/contacts/check/' . $contact_name;
-        logModuleCall('DNSAPI', 'Pre : Contact Check', $check, $url);
+        //logModuleCall('DNSAPI', 'Pre : Contact Check', $check, $url);
         $result = $this->call($url, $check, "POST");
-        logModuleCall('DNSAPI', 'Contact Check', $check, $result);
+        //logModuleCall('DNSAPI', 'Contact Check', $check, $result);
         return $result['results'];
     }
 
@@ -149,9 +149,9 @@ class DNSAPI {
      */
     public function register_domain($domain_info, $domain_id = '') {
         $url = $this->api_url . '/registry/domains/' . $domain_id;
-        logModuleCall('DNSAPI', 'Pre : Register Domain', $domain_info, $url);
+        //logModuleCall('DNSAPI', 'Pre : Register Domain', $domain_info, $url);
         $result = $this->call($url, $domain_info, "POST");
-        logModuleCall('DNSAPI', 'Register Domain', $domain_info, $result);
+        //logModuleCall('DNSAPI', 'Register Domain', $domain_info, $result);
         return $result['wid'];
     }
 
@@ -162,9 +162,9 @@ class DNSAPI {
 
     public function list_domains($domain_name='') {
         $url = $this->api_url . '/registry/domains/'.($domain_name!='' ? '?name=' . $domain_name : '');
-        logModuleCall('DNSAPI', 'Pre : List Domain', ['name' => $domain_name], $url);
+        //logModuleCall('DNSAPI', 'Pre : List Domain', ['name' => $domain_name], $url);
         $result = $this->call($url, [], "GET");
-        logModuleCall('DNSAPI', 'List Domain', ['name' => $domain_name], $result);
+        //logModuleCall('DNSAPI', 'List Domain', ['name' => $domain_name], $result);
         return $result['results'];
     }
 
@@ -174,9 +174,9 @@ class DNSAPI {
 
     public function view_domain($domain_wid) {
         $url = $this->api_url . '/registry/domains/'.$domain_wid;
-        logModuleCall('DNSAPI', 'Pre : View Domain', ['name' => $domain_wid], $url);
+        //logModuleCall('DNSAPI', 'Pre : View Domain', ['name' => $domain_wid], $url);
         $result = $this->call($url, [], "GET");
-        logModuleCall('DNSAPI', 'View Domain', ['name' => $domain_wid], $result);
+        //logModuleCall('DNSAPI', 'View Domain', ['name' => $domain_wid], $result);
         return $result;
     }
 
@@ -186,9 +186,9 @@ class DNSAPI {
 
     public function update_domain($domain_info, $domain_id = '') {
         $url = $this->api_url . '/registry/domains/' . $domain_id;
-        logModuleCall('DNSAPI', 'Pre : Update Domain', $domain_info, $url);
+        //logModuleCall('DNSAPI', 'Pre : Update Domain', $domain_info, $url);
         $result = $this->call($url, $domain_info, "PUT");
-        logModuleCall('DNSAPI', 'Update Domain', $domain_info, $result);
+        //logModuleCall('DNSAPI', 'Update Domain', $domain_info, $result);
         return $result['wid'];
     }
 
@@ -198,9 +198,9 @@ class DNSAPI {
 
     public function delete_domain($domain_id) {
         $url = $this->api_url . '/registry/domains/' . $domain_id;
-        logModuleCall('DNSAPI', 'Pre : Delete Domain', ['domain_wid' => $domain_id], $url);
+        //logModuleCall('DNSAPI', 'Pre : Delete Domain', ['domain_wid' => $domain_id], $url);
         $result = $this->call($url, [], "DELETE");
-        logModuleCall('DNSAPI', 'Delete Domain', ['domain_wid' => $domain_id], $result);
+        //logModuleCall('DNSAPI', 'Delete Domain', ['domain_wid' => $domain_id], $result);
         return true; 
     }
 
@@ -210,9 +210,9 @@ class DNSAPI {
 
     public function renew_domain($domain, $domain_id) {
         $url = $this->api_url . '/registry/domains/' . $domain_id . '/renew/';
-        logModuleCall('DNSAPI', 'Pre : Renew Domain', $domain, $url);
+        //logModuleCall('DNSAPI', 'Pre : Renew Domain', $domain, $url);
         $result = $this->call($url, $domain, "POST");
-        logModuleCall('DNSAPI', 'Renew Domain', $domain, $result);
+        //logModuleCall('DNSAPI', 'Renew Domain', $domain, $result);
         return $result['wid'];
     }
 
@@ -222,9 +222,9 @@ class DNSAPI {
 
     public function transfer_domain($domain) {
         $url = $this->api_url . '/registry/domains/transfer-request/';
-        logModuleCall('DNSAPI', 'Pre : Transfer Domain', $domain, $url);
+        //logModuleCall('DNSAPI', 'Pre : Transfer Domain', $domain, $url);
         $result = $this->call($url, $domain, "POST");
-        logModuleCall('DNSAPI', 'Transfer Domain', $domain, $result);
+        //logModuleCall('DNSAPI', 'Transfer Domain', $domain, $result);
         return $result['name'];
     }
 
@@ -234,9 +234,9 @@ class DNSAPI {
 
     public function cancel_domain_transfer($domain) {
         $url = $this->api_url . '/registry/domains/transfer-cancel/';
-        logModuleCall('DNSAPI', 'Pre : Cancel Domain Transfer', $domain, $url);
+        //logModuleCall('DNSAPI', 'Pre : Cancel Domain Transfer', $domain, $url);
         $result = $this->call($url, $domain, "POST");
-        logModuleCall('DNSAPI', 'Cancel Domain Transfer', $domain, $result);
+        //logModuleCall('DNSAPI', 'Cancel Domain Transfer', $domain, $result);
         return true;
     }
 
@@ -245,9 +245,9 @@ class DNSAPI {
      */
     public function reject_transfer_domain($domain) {
         $url = $this->api_url . '/registry/domains/'.$domain.'/transfer-reject/';
-        logModuleCall('DNSAPI', 'Pre : Reject Domain Transfer', $domain, $url);
+        //logModuleCall('DNSAPI', 'Pre : Reject Domain Transfer', $domain, $url);
         $result = $this->call($url, $domain, "POST");
-        logModuleCall('DNSAPI', 'Reject Domain Transfer', $domain, $result);
+        //logModuleCall('DNSAPI', 'Reject Domain Transfer', $domain, $result);
         return true;
     }
     /*
@@ -255,9 +255,9 @@ class DNSAPI {
      */
     public function approve_transfer_domain($domain, $domain_id) {
         $url = $this->api_url . '/registry/domains/'.$domain_id.'/transfer-approve/';
-        logModuleCall('DNSAPI', 'Pre : Approve Domain Transfer', $domain, $url);
+        //logModuleCall('DNSAPI', 'Pre : Approve Domain Transfer', $domain, $url);
         $result = $this->call($url, $domain, "POST");
-        logModuleCall('DNSAPI', 'Approve Domain Transfer', $domain, $result);
+        //logModuleCall('DNSAPI', 'Approve Domain Transfer', $domain, $result);
         return true;
     }
     /*
@@ -266,10 +266,11 @@ class DNSAPI {
 
     public function domain_info($domain) {
         $url = $this->api_url . '/registry/domains/info/';
-        logModuleCall('DNSAPI', 'Pre : Domain Info', $domain, $url);
+        //logModuleCall('DNSAPI', 'Pre : Domain Info', $domain, $url);
         $result = $this->call($url, $domain, "POST");
-        logModuleCall('DNSAPI', 'Domain Info', $domain, $result);
-            
+        //logModuleCall('DNSAPI', 'Domain Info', $domain, $result);
+        
+
         if($this->username != $result['results']['rar']){
             throw new \Exception("Domain owned by: ".$result['results']['rar']);
         }
@@ -293,9 +294,9 @@ class DNSAPI {
         ];
 
         $url = $this->api_url . '/registry/domains/' . $domain_info[0]['wid'] . '/lock/';
-        logModuleCall('DNSAPI', 'Pre : Lock Domain', $domain, $url);
+        //logModuleCall('DNSAPI', 'Pre : Lock Domain', $domain, $url);
         $result = $this->call($url, $domain, "POST");
-        logModuleCall('DNSAPI', 'Lock Domain', $domain, $result);
+        //logModuleCall('DNSAPI', 'Lock Domain', $domain, $result);
         return true;
     }
     /*
@@ -314,9 +315,9 @@ class DNSAPI {
         ];
 
         $url = $this->api_url . '/registry/domains/' . $domain_info[0]['wid'] . '/unlock/';
-        logModuleCall('DNSAPI', 'Pre : Unlock Domain', $domain, $url);
+        //logModuleCall('DNSAPI', 'Pre : Unlock Domain', $domain, $url);
         $result = $this->call($url, $domain, "POST");
-        logModuleCall('DNSAPI', 'Unlock Domain', $domain, $result);
+        //logModuleCall('DNSAPI', 'Unlock Domain', $domain, $result);
         return true;
     }
 
@@ -326,9 +327,9 @@ class DNSAPI {
 
     public function domain_check($domain) {
         $url = $this->api_url . '/registry/domains/check/';
-        logModuleCall('DNSAPI', 'Pre : Domain Check', $domain, $url);
+        //logModuleCall('DNSAPI', 'Pre : Domain Check', $domain, $url);
         $result = $this->call($url, $domain, "POST");
-        logModuleCall('DNSAPI', 'Domain Check', $domain, $result);
+        //logModuleCall('DNSAPI', 'Domain Check', $domain, $result);
         return $result;
     }
 
@@ -337,7 +338,7 @@ class DNSAPI {
      */
 
     public function check_domain_lock($domain) {
-        logModuleCall('DNSAPI', 'Pre : Domain Lock Check', $domain, ['locked' => (bool) $locked]);
+        //logModuleCall('DNSAPI', 'Pre : Domain Lock Check', $domain, ['locked' => (bool) $locked]);
             
         // Grab Domain Info
             $domain_arr =   [
@@ -353,7 +354,7 @@ class DNSAPI {
                 }
             }
 
-            logModuleCall('DNSAPI', 'Domain Lock', $domain, ['locked' => (bool) $locked]);
+            //logModuleCall('DNSAPI', 'Domain Lock', $domain, ['locked' => (bool) $locked]);
             return $locked;
     }
     
@@ -372,9 +373,9 @@ class DNSAPI {
     public function list_hosts($hostname='') {
         $url = $this->api_url . '/registry/hosts/'.($hostname!='' ? '?hostname='.$hostname : '');
         
-        logModuleCall('DNSAPI', 'Pre : List Hosts', $host_record, $url);
+        //logModuleCall('DNSAPI', 'Pre : List Hosts', $host_record, $url);
         $result = $this->call($url, $host_record, "GET");
-        logModuleCall('DNSAPI', 'List Hosts', $host_record, $result);
+        //logModuleCall('DNSAPI', 'List Hosts', $host_record, $result);
         return $result['results'];
     }
 
@@ -395,9 +396,9 @@ class DNSAPI {
             ]
         ];
         
-        logModuleCall('DNSAPI', 'Pre : Create Host', $host_record, $url);
+        //logModuleCall('DNSAPI', 'Pre : Create Host', $host_record, $url);
         $result = $this->call($url, $host_record, "POST");
-        logModuleCall('DNSAPI', 'Create Host', $host_record, $result);
+        //logModuleCall('DNSAPI', 'Create Host', $host_record, $result);
         return $result['wid'];
     }
     
@@ -418,9 +419,9 @@ class DNSAPI {
             ]
         ];
         
-        logModuleCall('DNSAPI', 'Pre : Update Host', $host_record, $url);
+        //logModuleCall('DNSAPI', 'Pre : Update Host', $host_record, $url);
         $result = $this->call($url, $host_record, "PUT");
-        logModuleCall('DNSAPI', 'Update Host', $host_record, $result);
+        //logModuleCall('DNSAPI', 'Update Host', $host_record, $result);
         return true;
     }
     
@@ -431,9 +432,9 @@ class DNSAPI {
     public function delete_host($wid) {
         $url = $this->api_url . '/registry/hosts/'.$wid;
         
-        logModuleCall('DNSAPI', 'Pre : Delete Host', $host_record, $url);
+        //logModuleCall('DNSAPI', 'Pre : Delete Host', $host_record, $url);
         $result = $this->call($url, $host_record, "DELETE");
-        logModuleCall('DNSAPI', 'Delete Host', $host_record, $result);
+        //logModuleCall('DNSAPI', 'Delete Host', $host_record, $result);
         return true;
     }
 
@@ -457,35 +458,52 @@ class DNSAPI {
         $process = curl_init($url); // A cURL command which can issue the request to the remote server
         
         curl_setopt($process, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "Authorization: Basic " . base64_encode($this->username . ":" . $this->password))); // Set the data type to be JSON
-        curl_setopt($process, CURLOPT_HEADER, 0);
-        curl_setopt($process, CURLOPT_TIMEOUT, 30); // The timeout for this connection attempt, if not results are received within 30 seconds, disconnect
+        curl_setopt($process, CURLOPT_HEADER, true);
+        curl_setopt($process, CURLOPT_TIMEOUT, 60); // The timeout for this connection attempt, if not results are received within 60 seconds, disconnect
         curl_setopt($process, CURLOPT_CUSTOMREQUEST, $method); // Let the invoker select the method
         // If method is GET then POSTFIELDS should be PARAMS
         curl_setopt($process, CURLOPT_POSTFIELDS, $jsonformat); // The payload we're sending to the server
         curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE); // Allows us to use the resulting output as a string variable
         curl_setopt($process, CURLOPT_SSL_VERIFYPEER, FALSE); // Don't verify the peer certificate, without this the command will fail because gateway-otande uses a self-signed certificate
         curl_setopt($process, CURLOPT_SSL_VERIFYHOST, FALSE); // Don't verify the peer host information against the provided certificate because it's a self-signed certificate
+        curl_setopt($process, CURLINFO_HEADER_OUT, true);
+        curl_setopt($process, CURLOPT_VERBOSE, true);
 
-
-        $return = curl_exec($process); // Run the cURL command
-        //logModuleCall('DNSAPI', 'API CALL : ' . $method, $data, $return);
+ 
+        $returnall = curl_exec($process); // Run the cURL command
         $code = curl_getinfo($process, CURLINFO_HTTP_CODE);
+        $curlinfo = curl_getinfo($process);
+        
+        $return = substr($returnall, $curlinfo['header_size']);
+        
+        logModuleCall('DNSAPI', 'API CALL : ' . $method, $curlinfo['request_header'].$jsonformat, $returnall);
+        
+        $error_message = curl_error($process);
+        $error_code = curl_errno($process);
         curl_close($process); // Close the connection
         $results = json_decode($return, true); // Decode the JSON string to an associative array for processing
         
 
-
-        if ($code >= 300 && array_key_exists("message", $results)) {
-            throw new \Exception("Server error (" . $code . "): " . $results["message"]);
-        } else if (!array_key_exists("results", $results) && array_key_exists("message", $results) && $code >= 300) {
-            throw new \Exception("Server error (" . $code . "): " . $results["message"]);
-        } else if (!array_key_exists("results", $results) && array_key_exists("detail", $results) && $code >= 300) {
-            throw new \Exception("Server error (" . $code . "): " . $results["detail"]);
-        } else if ($code >= 300) {
-            throw new \Exception("Server error (" . $code . "): " . $return);
-        } else if ($code == 0) { 
-            throw new \Exception("Connection Error (0), URL: ".$url);
-        } 
+        try {
+            if ($code >= 300 && array_key_exists("message", $results)) {
+                throw new \Exception("Server error (" . $code . "): " . $results["message"]);
+            } else if (!array_key_exists("results", $results) && array_key_exists("message", $results) && $code >= 300) {
+                throw new \Exception("Server error (" . $code . "): " . $results["message"]);
+            } else if (!array_key_exists("results", $results) && array_key_exists("detail", $results) && $code >= 300) {
+                throw new \Exception("Server error (" . $code . "): " . $results["detail"]);
+            } else if ($code >= 300) {
+                throw new \Exception("Server error (" . $code . "): " . $return);
+            } else if ($code == 0) {
+                if ($error_code > 0)
+                    throw new \Exception("Connection Error (". $error_message ."), URL: " . $url);
+                else
+                    throw new \Exception("Connection Error (0), URL: " . $url);
+            }
+        }
+        catch (\Exception $e) {
+            //logModuleCall('DNSAPI', 'API: CALL Error: ' .$error_code . ' ' . $error_message  , $data, $return);
+            throw $e;
+        }
 
         $results["success"] = true;
 

@@ -393,10 +393,10 @@ function dns_gateway_RenewDomain($params)
         $api = new DNSAPI();
         $api->setcreds($api_username, $api_password, $api_dev_mode, $ote_api_username, $ote_api_password);
             
-        //  Get Domain info
+            //  Get Domain info
             $domain_list = $api->list_domains($domain);
             
-        //  Renew Domain
+            //  Renew Domain
             $renew_array=[
                 "name"  => $domain,
                 "period" => $registrationPeriod,
@@ -431,31 +431,34 @@ function dns_gateway_RenewDomain($params)
 function dns_gateway_GetNameservers($params)
 {
     try {
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
 
-    // domain parameters
+        // domain parameters
         $sld = $params['sld'];
         $tld = $params['tld'];
         $domain = $sld.'.'.$tld;       
     
-    //  Connect To API
+        //  Connect To API
         $api = new DNSAPI();
         $api->setcreds($api_username, $api_password, $api_dev_mode, $ote_api_username, $ote_api_password);
         
-    //  Grab Domain Info
-        $domain_list = $api->list_domains($domain);
-        $domain_view = $api->view_domain($domain_list[0]['wid']);
+         //  Grab Domain Info
+        $domain_arr =   [
+            "name"  =>  $domain,
+            "authinfo"  =>  $api->generate_password($domain)
+        ];
+        $domain_info = $api->domain_info($domain_arr);
         
         $nameservers = [
             "success"   =>   true
         ];
         $count = 0;
-        foreach($domain_view['hosts'] as $namserver){
+        foreach($domain_info['hosts'] as $namserver){
             $count ++;
             $nameservers["ns$count"] = $namserver['hostname'];
         }
@@ -480,28 +483,28 @@ function dns_gateway_GetNameservers($params)
 function dns_gateway_SaveNameservers($params)
 {
     try {
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
     
-    // domain parameters
+        // domain parameters
         $sld = $params['sld'];
         $tld = $params['tld'];
         $domain = $sld . '.' . $tld;
         $registrationPeriod = ($params['regperiod'] > 0 ? $params['regperiod'] : 1);
     
-    //  Connect To API
+        //  Connect To API
         $api = new DNSAPI();
         $api->setcreds($api_username, $api_password, $api_dev_mode, $ote_api_username, $ote_api_password);
     
-    // Grab Domain Info
+        // Grab Domain Info
         $domain_list = $api->list_domains($domain);
         $domain_view = $api->view_domain($domain_list[0]['wid']);
         
-    //  Handle Nameservers
+        //  Handle Nameservers
         $hosts  =   $domain_view['hosts'];
         $new_hosts = [];
         
@@ -522,7 +525,7 @@ function dns_gateway_SaveNameservers($params)
             }
         } 
         
-    //  Update Domain
+        //  Update Domain
         $update_array   =   [
             "name"  =>  $domain,
             "period"    =>  $registrationPeriod,
@@ -555,14 +558,14 @@ function dns_gateway_SaveNameservers($params)
  */
 function dns_gateway_GetContactDetails($params)
 {
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
 
-    // domain parameters
+        // domain parameters
         $sld = $params['sld'];
         $tld = $params['tld'];    
         $domain = $sld . '.' . $tld;
@@ -621,35 +624,34 @@ function dns_gateway_SaveContactDetails($params)
 {
     try {
     
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
 
-    // domain parameters
+        // domain parameters
         $sld = $params['sld'];
         $tld = $params['tld'];    
         $domain = $sld . '.' . $tld;
 
         
-    // Connect To API
+        // Connect To API
         $api = new DNSAPI();
         $api->setcreds($api_username, $api_password, $api_dev_mode, $ote_api_username, $ote_api_password);
         
-    // Grab Domain Info
+        // Grab Domain Info
         $domain_list = $api->list_domains($domain);
         $domain_view = $api->view_domain($domain_list[0]['wid']);
         
-    // Loop Contacts
+        // Loop Contacts
         foreach($domain_view['contacts'] as $contact){
-            // Updated Contact information
+                // Updated Contact information
                 $new_details = $params['contactdetails'][ucfirst($contact["type"])];
-            //  Contact information.
+                //  Contact information.
                 $contact_info     =   [
                     "phone"     =>  $new_details["Phone Number"],
-                    "fax"       =>  null,
                     "email"     =>  $new_details["Email Address"],
                     "contact_address"   =>  [
                         [
@@ -668,10 +670,15 @@ function dns_gateway_SaveContactDetails($params)
 
                 ];
                 
-            //  Grab API Side Contact Info
+                if(isset($new_details['Fax Number']) && !empty($new_details['Fax Number']))
+                {
+                    $contact_info['fax'] = $new_details['Fax Number'];
+                }
+                
+                //  Grab API Side Contact Info
                 $api_contact = $api->contact_info($contact['contact']['id']);
                 
-            //  Update Contact
+                //  Update Contact
                 $api->update_contact($contact_info, $api_contact['wid']);
         } 
 
@@ -697,14 +704,14 @@ function dns_gateway_CheckAvailability($params)
 {    
     try {
     
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
 
-    // availability check parameters
+        // availability check parameters
         $searchTerm = $params['searchTerm'];
         $punyCodeSearchTerm = $params['punyCodeSearchTerm'];
         $tldsToInclude = $params['tldsToInclude'];
@@ -712,14 +719,14 @@ function dns_gateway_CheckAvailability($params)
         $premiumEnabled = (bool) $params['premiumEnabled'];
         
 
-    // Connect To API
+        // Connect To API
         $api = new DNSAPI();
         $api->setcreds($api_username, $api_password, $api_dev_mode, $ote_api_username, $ote_api_password);
 
-    //  Initiate Results List
+        //  Initiate Results List
         $results = new ResultsList();
         
-    //  loop Through Domains To Check Availability
+        //  loop Through Domains To Check Availability
         
         foreach($params['tlds'] as $tld){
             $searchResult = new SearchResult($domain['sld'], $tld);
@@ -730,7 +737,7 @@ function dns_gateway_CheckAvailability($params)
             
             $domain_check = $api->domain_check($domain_info);
             
-            // Determine the appropriate status to return
+                // Determine the appropriate status to return
                 if ($domain_check['results']['avail'] == '1') {
                     $status = SearchResult::STATUS_NOT_REGISTERED;
                 } elseif ($domain_check['results']['avail'] == '0' && $domain_check['results']['reason'] == "In Use") {
@@ -742,7 +749,7 @@ function dns_gateway_CheckAvailability($params)
                 }
                 $searchResult->setStatus($status);
 
-            // Return premium information if applicable
+                // Return premium information if applicable
                 if ($domain_check['charge']['category'] != "standard") {
                     $searchResult->setPremiumDomain(true);
                     $searchResult->setPremiumCostPricing(
@@ -755,7 +762,7 @@ function dns_gateway_CheckAvailability($params)
                     );
                 }
 
-            // Append to the search results list
+                // Append to the search results list
                 $results->append($searchResult);
                     
         }
@@ -782,19 +789,19 @@ function dns_gateway_CheckAvailability($params)
 function dns_gateway_GetRegistrarLock($params)
 {    
     try {
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
         
-    // domain parameters
+        // domain parameters
         $sld = $params['sld'];
         $tld = $params['tld'];
         $domain = $sld . '.' . $tld;
         
-    //Call API
+        //Call API
         $api = new DNSAPI();  
         $api->setcreds($api_username, $api_password, $api_dev_mode, $ote_api_username, $ote_api_password);
         $domain_lock = $api->check_domain_lock($domain);
@@ -819,19 +826,19 @@ function dns_gateway_GetRegistrarLock($params)
 function dns_gateway_SaveRegistrarLock($params)
 {
     try {
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
 
-    // domain parameters
+        // domain parameters
         $sld = $params['sld'];
         $tld = $params['tld'];
         $domain = $sld . '.' . $tld;    
 
-    // Build post data
+        // Build post data
         $postfields = [
             'domain' => $domain
         ];
@@ -861,20 +868,20 @@ function dns_gateway_SaveRegistrarLock($params)
 function dns_gateway_GetEPPCode($params)
 {
     try{
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
 
-    // domain parameters
+        // domain parameters
         $sld = $params['sld'];
         $tld = $params['tld'];
         $domain = $sld . '.' . $tld;      
         
         if($tld!='co.za' && $tld!='net.za' && $tld!='org.za' && $tld!='web.za'){
-            //Call api
+                //Call api
                 $api = new DNSAPI();
                 $api->setcreds($api_username, $api_password, $api_dev_mode, $ote_api_username, $ote_api_password);        
                 $values["eppcode"] = $api->generate_password($domain);
@@ -901,20 +908,20 @@ function dns_gateway_GetEPPCode($params)
 function dns_gateway_RequestDelete($params)
 {
     try{
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
 
-    // domain parameters
+        // domain parameters
         $sld = $params['sld'];
         $tld = $params['tld'];
         $domain = $sld . '.' . $tld;      
         
     
-    //Call api
+        //Call api
         $api = new DNSAPI();
         $api->setcreds($api_username, $api_password, $api_dev_mode, $ote_api_username, $ote_api_password); 
         $domain_info = $api->list_domains($domain);
@@ -937,32 +944,32 @@ function dns_gateway_RequestDelete($params)
 function dns_gateway_RegisterNameserver($params)
 {
     try {
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
         
-    // domain parameters
+        // domain parameters
         $sld = $params['sld'];
         $tld = $params['tld'];    
         $domain = $sld . '.' . $tld;
         $registrationPeriod = ($params['regperiod'] > 0 ? $params['regperiod'] : 1);
         
-    // nameserver parameters
+        // nameserver parameters
         $nameserver = $params['nameserver'];
         $ipAddress = $params['ipaddress'];
 
-    // Connect To API
+        // Connect To API
         $api = new DNSAPI();
         $api->setcreds($api_username, $api_password, $api_dev_mode, $ote_api_username, $ote_api_password);
 
-    // Grab Domain Info
+        // Grab Domain Info
         $domain_list = $api->list_domains($domain);
         $domain_view = $api->view_domain($domain_list[0]['wid']);
         
-    //  Prepare Hosts
+        //  Prepare Hosts
         $hosts  =   $domain_view['hosts'];
         $hosts[] = [
             "hostname" => $params['nameserver'],
@@ -1005,33 +1012,33 @@ function dns_gateway_RegisterNameserver($params)
 function dns_gateway_ModifyNameserver($params)
 {
     try {
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
         
-    // domain parameters
+        // domain parameters
         $sld = $params['sld'];
         $tld = $params['tld'];    
         $domain = $sld . '.' . $tld;
         $registrationPeriod = ($params['regperiod'] > 0 ? $params['regperiod'] : 1);
         
-    // nameserver parameters
+        // nameserver parameters
         $nameserver = $params['nameserver'];
         $CurrentIpAddress = $params['currentipaddress'];
         $NewIpAddress = $params['newipaddress'];
 
-    // Connect To API
+        // Connect To API
         $api = new DNSAPI();
         $api->setcreds($api_username, $api_password, $api_dev_mode, $ote_api_username, $ote_api_password);
 
-    // Grab Domain Info
+        // Grab Domain Info
         $domain_list = $api->list_domains($domain);
         $domain_view = $api->view_domain($domain_list[0]['wid']);
         
-    //  Prepare Hosts
+        //  Prepare Hosts
         $hosts  =   $domain_view['hosts'];
         foreach($hosts as $host_key => $host){
             if($host['hostname']==$nameserver){
@@ -1080,31 +1087,31 @@ function dns_gateway_ModifyNameserver($params)
 function dns_gateway_DeleteNameserver($params)
 {
     try {
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
         
-    // domain parameters
+        // domain parameters
         $sld = $params['sld'];
         $tld = $params['tld'];    
         $domain = $sld . '.' . $tld;
         $registrationPeriod = ($params['regperiod'] > 0 ? $params['regperiod'] : 1);
         
-    // nameserver parameters
+        // nameserver parameters
         $nameserver = $params['nameserver'];
 
-    // Connect To API
+        // Connect To API
         $api = new DNSAPI();
         $api->setcreds($api_username, $api_password, $api_dev_mode, $ote_api_username, $ote_api_password);
 
-    // Grab Domain Info
+        // Grab Domain Info
         $domain_list = $api->list_domains($domain);
         $domain_view = $api->view_domain($domain_list[0]['wid']);
         
-    //  Prepare Hosts
+        //  Prepare Hosts
         $hosts  =   $domain_view['hosts'];
         $new_hosts  =   [];
         foreach($hosts as $host_key => $host){
@@ -1141,27 +1148,27 @@ function dns_gateway_DeleteNameserver($params)
 function dns_gateway_Sync($params)
 {
     try {
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
         
-    // domain parameters
+        // domain parameters
         $sld = $params['sld'];
         $tld = $params['tld'];        
         $domain = $sld.'.'.$tld;        
     
-    //  Connect To API
+        //  Connect To API
         $api = new DNSAPI();
         $api->setcreds($api_username, $api_password, $api_dev_mode, $ote_api_username, $ote_api_password);
     
-    // Grab Domain Info
+        // Grab Domain Info
         $domain_list = $api->list_domains($domain);
         $domain_view = $api->view_domain($domain_list[0]['wid']);
     
-    //  Build Return Result
+        //  Build Return Result
         $result =   [
             'expirydate'    =>  $domain_view['expiry'],
             'active'    =>  false,
@@ -1196,28 +1203,28 @@ function dns_gateway_Sync($params)
 
 function dns_gateway_Update_EPP_key($params){
     try {
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
     
-    // domain parameters
+        // domain parameters
         $sld = $params['sld'];
         $tld = $params['tld'];
         $domain = $sld . '.' . $tld;
         $registrationPeriod = ($params['regperiod'] > 0 ? $params['regperiod'] : 1);
 
-    //  Connect To API
+        //  Connect To API
         $api = new DNSAPI();
         $api->setcreds($api_username, $api_password, $api_dev_mode, $ote_api_username, $ote_api_password);
     
-    // Grab Domain Info
+        // Grab Domain Info
         $domain_list = $api->list_domains($domain);
         $domain_view = $api->view_domain($domain_list[0]['wid']);
         
-    //  Update Domain
+        //  Update Domain
         $update_array   =   [
             "name"  =>  $domain,
             "period"    =>  $registrationPeriod,
@@ -1249,27 +1256,27 @@ function dns_gateway_Update_EPP_key($params){
 function dns_gateway_TransferSync($params)
 {
     try {
-    // user defined configuration values
+        // user defined configuration values
         $api_username = $params['API_Username'];
         $api_password = $params['API_Password'];
         $ote_api_username = $params['OTE_API_Username'];
         $ote_api_password = $params['OTE_API_Password'];
         $api_dev_mode = $params['Dev_Mode'];
         
-    // domain parameters       
+        // domain parameters       
         $sld = $params['sld'];
         $tld = $params['tld'];
         $domain = $sld . '.' . $tld;
         
-    //  Connect To API
+        //  Connect To API
         $api = new DNSAPI();
         $api->setcreds($api_username, $api_password, $api_dev_mode, $ote_api_username, $ote_api_password);
         
-    // Grab Domain Info
+        // Grab Domain Info
         $domain_list = $api->list_domains($domain);
         $domain_view = $api->view_domain($domain_list[0]['wid']);
                
-    //  Return Results
+        //  Return Results
         
         if($api_username == $domain_view['rar']){
             $result = [
@@ -1284,7 +1291,7 @@ function dns_gateway_TransferSync($params)
             return $result;
         }
     
-        // No status change, return empty array
+            // No status change, return empty array
             return array();
     
 
