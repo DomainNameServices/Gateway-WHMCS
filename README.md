@@ -92,4 +92,3 @@ For more information please refer to http://docs.whmcs.com/Domains_Configuration
 For support please contact support@dns.business
 
 _Domain Name Services (Pty) Ltd is a niche tech company comprised of a specialised team of domain name industry experts committed to providing our domain name registry, registrar and reseller clients with highly adaptable, robust and cost effective solutions anywhere in the world. DNS currently provides the core registry systems and related services for the .ZA Central Registry (ZACR), including assisting the ZACR with the migration of its legacy systems to a new EPP based platform._ 
-:q
