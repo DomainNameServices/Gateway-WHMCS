@@ -472,7 +472,12 @@ class DNSAPI {
  
         $returnall = curl_exec($process); // Run the cURL command
         $code = curl_getinfo($process, CURLINFO_HTTP_CODE);
-
+        $curlinfo = curl_getinfo($process);
+        
+        $return = substr($returnall, $curlinfo['header_size']);
+        
+        logModuleCall('DNSAPI', 'API CALL : ' . $method, $curlinfo['request_header'].$jsonformat, $returnall);
+        
         $error_message = curl_error($process);
         $error_code = curl_errno($process);
         curl_close($process); // Close the connection
@@ -496,7 +501,7 @@ class DNSAPI {
             }
         }
         catch (\Exception $e) {
-            logModuleCall('DNSAPI', 'API: CALL Error: ' .$error_code . ' ' . $error_message  , $data, $return);
+            //logModuleCall('DNSAPI', 'API: CALL Error: ' .$error_code . ' ' . $error_message  , $data, $return);
             throw $e;
         }
 
