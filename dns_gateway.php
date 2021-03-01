@@ -461,7 +461,7 @@ function dns_gateway_RenewDomain($params)
             'name'         => $domain,
             'period'       => $registrationPeriod,
             'period_unit'  => 'y',
-            'curExpDate'   => date(
+            'curExpDate'   => gmdate(
                 'Y-m-d',
                 strtotime($domain_list[0]['expiry'])
             )
