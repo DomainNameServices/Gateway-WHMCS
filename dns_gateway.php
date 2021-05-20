@@ -20,9 +20,10 @@ if (!defined('WHMCS')) {
     die('This file cannot be accessed directly');
 }
 
-use WHMCS\Domains\DomainLookup\ResultsList;
-use WHMCS\Domains\DomainLookup\SearchResult;
-use WHMCS\Module\Registrar\dns_gateway\DNSAPI;
+use \WHMCS\Domains\DomainLookup\ResultsList;
+use \WHMCS\Domains\DomainLookup\SearchResult;
+use \WHMCS\Module\Registrar\dns_gateway\DNSAPI;
+use \WHMCS\Database\Capsule;
 
 // Require any libraries needed for the module to function.
 
@@ -114,7 +115,6 @@ function dns_gateway_getConfigArray()
 function dns_gateway_RegisterDomain($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -138,7 +138,6 @@ function dns_gateway_RegisterDomain($params)
             if (isset($params['ns'.$n]) && $params['ns'.$n] != '') {
                 $nameservers[] = [
                     'hostname'  => $params['ns'.$n],
-                    'glue'      => []
                 ];
             }
         }
@@ -311,7 +310,7 @@ function dns_gateway_RegisterDomain($params)
 
         //  Call The Register Domain Function
         $api->register_domain($domain);
-    
+
         return [
             'success' => true
         ];
@@ -335,7 +334,6 @@ function dns_gateway_RegisterDomain($params)
 function dns_gateway_TransferDomain($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -386,7 +384,7 @@ function dns_gateway_TransferDomain($params)
         $domain = [
             'name'      => $domain,
             'authinfo'  => (
-                $eppCode=='' && $tld=='co.za' ?
+                $eppCode == '' && $tld == 'co.za' ?
                 'coza' :
                 $eppCode
             )
@@ -398,19 +396,20 @@ function dns_gateway_TransferDomain($params)
         }
 
         //  Call The Register Domain Function
-        $api->transfer_domain($domain);
+        $result = $api->transfer_domain($domain);
+
+        if($result) {
+            updateDomainDatabaseStatus($params['domainid'], 'Pending Transfer');
+        }
 
         return [
             'success' => true
         ];
 
     } catch (\Exception $e) {
-        return [
-            'error' => $e->getMessage()
-        ];
+        return dns_gateway_TransferStatusUpdate($params['domainid'], $e->getMessage());
     }
 }
-
 
 # Function to renew domain
 /*
@@ -426,7 +425,6 @@ function dns_gateway_TransferDomain($params)
 function dns_gateway_RenewDomain($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -495,7 +493,6 @@ function dns_gateway_RenewDomain($params)
 function dns_gateway_GetNameservers($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -555,7 +552,6 @@ function dns_gateway_GetNameservers($params)
 function dns_gateway_SaveNameservers($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -641,7 +637,6 @@ function dns_gateway_SaveNameservers($params)
 function dns_gateway_GetContactDetails($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -808,7 +803,6 @@ function dns_gateway_SaveContactDetails($params)
 function dns_gateway_CheckAvailability($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -838,7 +832,7 @@ function dns_gateway_CheckAvailability($params)
 
         // Loop Through Domains To Check Availability
         foreach($params['tlds'] as $tld) {
-            $searchResult = new SearchResult($domain['sld'], $tld);
+            $searchResult = new SearchResult($params['sld'], $tld);
 
             $domain_info = [
                 'name' => $params['sld'].$tld
@@ -847,16 +841,16 @@ function dns_gateway_CheckAvailability($params)
             $domain_check = $api->domain_check($domain_info);
 
             // Determine the appropriate status to return
-            if ($domain_check['results']['avail'] == '1') {
+            if ($domain_check['results'][0]['avail'] == '1') {
                 $status = SearchResult::STATUS_NOT_REGISTERED;
             } else if (
-                    $domain_check['results']['avail'] == '0' &&
-                    $domain_check['results']['reason'] == 'In Use'
+                    $domain_check['results'][0]['avail'] == '0' &&
+                    $domain_check['results'][0]['reason'] == 'Domain exists'
             ) {
                 $status = SearchResult::STATUS_REGISTERED;
             } else if (
-                    $domain_check['results']['avail'] == '0' &&
-                    $domain_check['results']['reason'] != 'In Use'
+                    $domain_check['results'][0]['avail'] == '0' &&
+                    $domain_check['results'][0]['reason'] != 'Domain exists'
             ) {
                 $status = SearchResult::STATUS_RESERVED;
             } else {
@@ -904,7 +898,6 @@ function dns_gateway_CheckAvailability($params)
 function dns_gateway_GetRegistrarLock($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -949,7 +942,6 @@ function dns_gateway_GetRegistrarLock($params)
 function dns_gateway_SaveRegistrarLock($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -1176,7 +1168,6 @@ function dns_gateway_RegisterNameserver($params)
 function dns_gateway_ModifyNameserver($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -1261,7 +1252,6 @@ function dns_gateway_ModifyNameserver($params)
 function dns_gateway_DeleteNameserver($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -1370,10 +1360,13 @@ function dns_gateway_Sync($params)
             'transferredAway'   => false
         ];
 
+        $expiryTime  = strtotime($domain_view['expiry']);
+        $currentTime = strtotime(date("Y-m-d\TH:i:s\Z"));
+
         if ($api_username != $domain_view['rar']) {
             $result['transferredAway'] = true;
         }
-        else if ($domain_view['expiry'] > date()) {
+        else if ($expiryTime > $currentTime) {
             $result['active'] = true;
 
             // Update auth key just to be sure that it's
@@ -1391,6 +1384,7 @@ function dns_gateway_Sync($params)
         ];
     }
 }
+
 /*
  * Update EPP Key
  */
@@ -1513,9 +1507,7 @@ function dns_gateway_TransferSync($params)
         return array();
 
     } catch (\Exception $e) {
-        return [
-            'error' => $e->getMessage()
-        ];
+        return dns_gateway_TransferStatusUpdate($params['domainid'], $e->getMessage());
     }
 }
 
@@ -1527,7 +1519,6 @@ function dns_gateway_TransferSync($params)
 function dns_gateway_Cancel_Transfer($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -1574,7 +1565,6 @@ function dns_gateway_Cancel_Transfer($params)
 function dns_gateway_Reject_Transfer($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -1615,6 +1605,7 @@ function dns_gateway_Reject_Transfer($params)
         ];
     }
 }
+
 # Function to Approve domain transfer
 /*
  *
@@ -1623,7 +1614,6 @@ function dns_gateway_Reject_Transfer($params)
 function dns_gateway_Approve_Transfer($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -1677,7 +1667,6 @@ function dns_gateway_Approve_Transfer($params)
 function dns_gateway_Lock_Domain($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -1716,7 +1705,6 @@ function dns_gateway_Lock_Domain($params)
 function dns_gateway_Unlock_Domain($params)
 {
     try {
-
         // User defined configuration values
         $api_username        = $params['API_Username'];
         $api_password        = $params['API_Password'];
@@ -1763,4 +1751,34 @@ function dns_gateway_AdminCustomButtonArray()
         'Update EPP Key'      => 'Update_EPP_key'
     ];
     return $buttonarray;
+}
+
+# Function update domain status for transfer
+/*
+ * Called when API returns "transferPending".
+ *
+ * Function will update domain status in WHMCS database.
+ */
+
+function dns_gateway_TransferStatusUpdate($domainID, $message)
+{
+    if(str_contains($message,  'pendingTransfer')) {
+        updateDomainDatabaseStatus($domainID, 'Pending Transfer');
+        return ['error' => 'Domain status "Pending Transfer"'];
+    }
+    return ['error' => $message];
+}
+
+# Function update domain status in WHMCS database
+/*
+ *
+ */
+
+function updateDomainDatabaseStatus($domainId, $status) {
+    return Capsule::table('tbldomains')
+            ->where('id', $domainId)
+            ->update(array(
+                'status' => $status
+                )
+            );
 }
