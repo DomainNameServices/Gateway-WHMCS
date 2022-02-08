@@ -188,6 +188,36 @@ class DNSAPI
     }
 
     /*
+     * Pulls Domains Transferring In
+     *  - Can Be Filtered By Domain Name
+     */
+
+    public function list_domain_transfer_in($domain_name = '')
+    {
+        $url = $this->api_url.
+            '/registry/transfersin/'.
+            ($domain_name!='' ? '?name=' . $domain_name : '');
+
+        $result = $this->call($url, [], 'GET');
+        return $result['results'];
+    }
+
+    /*
+     * Pulls Domains Transferring Out
+     *  - Can Be Filtered By Domain Name
+     */
+
+    public function list_domain_transfer_out($domain_name = '')
+    {
+        $url = $this->api_url.
+            '/registry/transfersout/'.
+            ($domain_name!='' ? '?name=' . $domain_name : '');
+
+        $result = $this->call($url, [], 'GET');
+        return $result['results'];
+    }
+
+    /*
      * Get's Domain's info
      */
 

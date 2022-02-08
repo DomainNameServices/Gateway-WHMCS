@@ -1459,16 +1459,16 @@ function dns_gateway_TransferSync($params)
     try {
 
         // User defined configuration values
-        $api_username        = $params['API_Username'];
-        $api_password        = $params['API_Password'];
-        $ote_api_username    = $params['OTE_API_Username'];
-        $ote_api_password    = $params['OTE_API_Password'];
-        $api_dev_mode        = $params['Dev_Mode'];
+        $api_username = $params['API_Username'];
+        $api_password = $params['API_Password'];
+        $ote_api_username = $params['OTE_API_Username'];
+        $ote_api_password = $params['OTE_API_Password'];
+        $api_dev_mode = $params['Dev_Mode'];
 
         // Domain parameters
         $sld = $params['sld'];
         $tld = $params['tld'];
-        $domain = $sld.'.'.$tld;
+        $domain = $sld . '.' . $tld;
 
         // Connect To API
         $api = new DNSAPI();
@@ -1480,12 +1480,23 @@ function dns_gateway_TransferSync($params)
             $ote_api_password
         );
 
-        // Grab Domain Info
+        // Grab Domain
         $domain_list = $api->list_domains($domain);
-        $domain_view = $api->view_domain($domain_list[0]['wid']);
 
-        // Return Results
-        if ($api_username == $domain_view['rar']) {
+        // Grab Domain Transfer In
+        $domain_transfer_in = $api->list_domain_transfer_in($domain);
+
+        // Grab Domain Transfer out
+        $domain_transfer_out = $api->list_domain_transfer_out($domain);
+
+        if (isset($domain_transfer_in[0]['wid']) or isset($domain_transfer_out[0]['wid'])) {
+            // Still pending transfer
+            return [];
+        }
+
+        if (isset($domain_list[0]['wid'])) {
+
+            $domain_view = $api->view_domain($domain_list[0]['wid']);
             $result = [
                 'completed'     => true,
                 'expirydate'    => $domain_view['expiry']
@@ -1501,10 +1512,12 @@ function dns_gateway_TransferSync($params)
             }
 
             return $result;
-        }
 
-        // No status change, return empty array
-        return array();
+        } else {
+            return [
+                'failed'        => true
+            ];
+        }
 
     } catch (\Exception $e) {
         return dns_gateway_TransferStatusUpdate($params['domainid'], $e->getMessage());
