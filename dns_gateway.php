@@ -522,9 +522,6 @@ function dns_gateway_GetNameservers($params)
         ];
         $domain_info = $api->domain_info($domain_arr);
 
-        $nameservers = [
-            'success' => true
-        ];
         $count = 0;
         foreach ($domain_info['hosts'] as $namserver) {
             $count++;
