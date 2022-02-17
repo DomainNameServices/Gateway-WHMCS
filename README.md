@@ -5,9 +5,9 @@ To integrate the DNS Gateway Module on your cpanel or server please follow the i
 ##### Pre-requisites
 
 - Access to WHMCS admin area.
-- Gateway account with API access. (Sign up on https://portal.dns.business, read and accept all terms and condition and then request live or OT&E server credentials.) 
+- Gateway account with API access. (Sign up on https://portal.dns.business, read and accept all terms and conditions and then request live or OT&E server credentials.) 
 
-NOTE: DNS Gateway has a production as well as a test server environment. The test server environment is called O&TE. We urge you to test the WHMCS Registrar module in our O&TE environment, before pointing it to production. 
+NOTE: DNS Gateway has a production as well as a test server environment. The test server environment is called OT&E. We recommend that you setup and test the WHMCS Registrar module here before proceeding to a LIVE/PRODUCTION environment. 
 
 ## Integrating the Module on a CPANEL
 
@@ -75,7 +75,7 @@ To configure WHMCS for use with DNS Gateway, please follow the steps below.
 3. Click on **Activate** next to DNS Gateway in the list:
 ![Activate Plugin](https://github.com/calebtech/pictures/blob/master/Screenshot%20from%202019-05-16%2009-09-24.png)
 
-4. Enter your DNS Gateway API credentials, If you wish to test the module before you go live, you can use your DNS Gateway O&TE API credentials to corresponding text boxes (O&TE API) and check the "Enable OTE Testing Mode".
+4. Enter your DNS Gateway EPP username and password. If you wish to test the module before you go live, you can use your DNS Gateway O&TE username and password. Remember to  check the "Enable OTE Testing Mode".
 ![Activate Plugin](https://github.com/calebtech/pictures/blob/master/Screenshot%20from%202019-05-16%2009-36-04.png)
 
 5. Optional Settings
@@ -83,7 +83,7 @@ To configure WHMCS for use with DNS Gateway, please follow the steps below.
  
 6. Click save changes
 
-The DNS Gateway plug-in is now ready for use and will function just like any other built-in WHMCS registrar module. You can now change DNS Gateway to be the automatic registrar and configure TLDs and services for all your customers. 
+The DNS Gateway module is now ready for use and will function just like any other built-in WHMCS registrar module. You can now change DNS Gateway to be the automatic registrar and configure TLDs and services for all your customers. 
 
 To perform these actions, click on the Setup menu, select Products/Services and click on Domain Pricing in your WHMCS admin panel:
 
@@ -91,4 +91,4 @@ For more information please refer to http://docs.whmcs.com/Domains_Configuration
 
 For support please contact support@dns.business
 
-_Domain Name Services (Pty) Ltd is a niche tech company comprised of a specialised team of domain name industry experts committed to providing our domain name registry, registrar and reseller clients with highly adaptable, robust and cost effective solutions anywhere in the world. DNS currently provides the core registry systems and related services for the .ZA Central Registry (ZACR), including assisting the ZACR with the migration of its legacy systems to a new EPP based platform._ 
+_DNS Africa Ltd is a GBC1 private company incorporated in the Republic of Mauritius and Domain Name Services (Pty) Ltd is a private company incorporated and based in South Africa. These two organizations fall under the DNS.Business umbrella. Together we are a specialised team of domain industry experts committed to providing our registry and registrar partners and clients with highly adaptable, robust and cost effective software solutions. For more about DNS Business please visit www.dns.business._ 
