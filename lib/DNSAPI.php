@@ -63,7 +63,7 @@ class DNSAPI
     public function generate_password($domain)
     {
         // Generate
-        $epp_key = substr(md5($domain . $this->username), 0, 6).'#A4';
+        $epp_key = substr(md5($domain . $this->username), 0, 13).'#A4';
         return $epp_key;
     }
 
