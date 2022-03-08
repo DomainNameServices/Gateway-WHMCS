@@ -837,6 +837,11 @@ function dns_gateway_CheckAvailability($params)
 
             $domain_check = $api->domain_check($domain_info);
 
+            // Simplify logic below with za's wierd reasons
+            if ($domain_check['results'][0]['reason'] == 'In Use') {
+                $domain_check['results'][0]['reason'] == 'Domain exists';
+            }
+
             // Determine the appropriate status to return
             if ($domain_check['results'][0]['avail'] == '1') {
                 $status = SearchResult::STATUS_NOT_REGISTERED;
