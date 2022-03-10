@@ -350,7 +350,7 @@ function dns_gateway_TransferDomain($params)
             $params['regperiod'] :
             1
         );
-        $eppCode = $params['eppcode'];
+        $eppCode = htmlspecialchars_decode($params['eppcode']);
 
         // Connect To API
         $api = new DNSAPI();
