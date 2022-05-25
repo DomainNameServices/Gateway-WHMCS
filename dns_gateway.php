@@ -30,7 +30,7 @@ use \WHMCS\Database\Capsule;
 /**
  * Define module related metadata
  *
- * Provide some module information including 
+ * Provide some module information including
  * the display name and API Version to
  * determine the method of decoding the input values.
  *
@@ -333,81 +333,70 @@ function dns_gateway_RegisterDomain($params)
 
 function dns_gateway_TransferDomain($params)
 {
-    try {
-        // User defined configuration values
-        $api_username        = $params['API_Username'];
-        $api_password        = $params['API_Password'];
-        $ote_api_username    = $params['OTE_API_Username'];
-        $ote_api_password    = $params['OTE_API_Password'];
-        $api_dev_mode        = $params['Dev_Mode'];
+    // User defined configuration values
+    $api_username        = $params['API_Username'];
+    $api_password        = $params['API_Password'];
+    $ote_api_username    = $params['OTE_API_Username'];
+    $ote_api_password    = $params['OTE_API_Password'];
+    $api_dev_mode        = $params['Dev_Mode'];
 
-        // Registration parameters
-        $sld = $params['sld'];
-        $tld = $params['tld'];
-        $domain = $sld.'.'.$tld;
-        $registrationPeriod = (
-            $params['regperiod'] > 0 ?
-            $params['regperiod'] :
-            1
-        );
-        $eppCode = htmlspecialchars_decode($params['eppcode']);
+    // Registration parameters
+    $sld = $params['sld'];
+    $tld = $params['tld'];
+    $domain = $sld.'.'.$tld;
+    $registrationPeriod = $params['regperiod'];
+    $eppCode = $params['eppcode'];
+    if ($tld == 'co.za') {
+        $eppCode = 'coza';
+    }
 
-        // Connect To API
-        $api = new DNSAPI();
-        $api->setcreds(
-            $api_username,
-            $api_password,
-            $api_dev_mode,
-            $ote_api_username,
-            $ote_api_password
-        );
 
-        /**
-         * Premium domain parameters.
-         *
-         * Premium domains enabled informs you if
-         * the admin user has enabled
-         * the selling of premium domain names.
-         * If this domain is a premium name,
-         * `premiumCost` will contain the cost price
-         * retrieved at the time of
-         * the order being placed.
-         * The premium order should
-         * only be processed
-         * if the cost price now
-         * matches the previously fetched amount.
-         */
-        $premiumDomainsEnabled = (bool) $params['premiumEnabled'];
-        $premiumDomainsCost = $params['premiumCost'];
+    // Connect To API
+    $api = new DNSAPI();
+    $api->setcreds(
+        $api_username,
+        $api_password,
+        $api_dev_mode,
+        $ote_api_username,
+        $ote_api_password
+    );
 
-        // Transfer Domain
-        $domain = [
-            'name'      => $domain,
-            'authinfo'  => (
-                $eppCode == '' && $tld == 'co.za' ?
-                'coza' :
-                $eppCode
-            )
-        ];
+    /**
+     * Premium domain parameters.
+     *
+     * Premium domains enabled informs you if
+     * the admin user has enabled
+     * the selling of premium domain names.
+     * If this domain is a premium name,
+     * `premiumCost` will contain the cost price
+     * retrieved at the time of
+     * the order being placed.
+     * The premium order should
+     * only be processed
+     * if the cost price now
+     * matches the previously fetched amount.
+     */
+    $premiumDomainsEnabled = (bool) $params['premiumEnabled'];
+    $premiumDomainsCost = $params['premiumCost'];
 
-        // Add Premium Charge If Applicable
-        if($premiumDomainsEnabled && $premiumDomainsCost) {
-            $domain['charge']['price'] = $premiumDomainsCost;
-        }
+    // Transfer Domain
+    $domain = [
+        'name'      => $domain,
+        'authinfo'  => $eppCode,
+        'period'    => $registrationPeriod
+    ];
 
+    // Add Premium Charge If Applicable
+    if($premiumDomainsEnabled && $premiumDomainsCost) {
+        $domain['charge']['price'] = $premiumDomainsCost;
+    }
+
+    try{
         //  Call The Register Domain Function
-        $result = $api->transfer_domain($domain);
-
-        if($result) {
-            updateDomainDatabaseStatus($params['domainid'], 'Pending Transfer');
-        }
-
-        return [
-            'success' => true
-        ];
-
-    } catch (\Exception $e) {
-        return dns_gateway_TransferStatusUpdate($params['domainid'], $e->getMessage());
+        $api->transfer_domain($domain);
+    }
+    catch (\Exception $e){
+        return ['error' => $e->getMessage()];
     }
 }
 
@@ -515,14 +504,10 @@ function dns_gateway_GetNameservers($params)
             $ote_api_password
         );
 
-        // Grab Domain Info
-        $domain_arr = [
-            'name'      => $domain,
-            'authinfo'  => $api->generate_password($domain)
-        ];
-        $domain_info = $api->domain_info($domain_arr);
+        $domain_info = $api->domain_sync($domain);
 
         $count = 0;
+        $nameservers = [];
         foreach ($domain_info['hosts'] as $namserver) {
             $count++;
             $nameservers['ns'.$count] = $namserver['hostname'];
@@ -531,6 +516,9 @@ function dns_gateway_GetNameservers($params)
         return $nameservers;
 
     } catch (\Exception $e) {
+        if (str_contains($e->getMessage(),'404')){
+            return Null;
+        }
         return [
             'error' => $e->getMessage()
         ];
@@ -1144,7 +1132,7 @@ function dns_gateway_RegisterNameserver($params)
             'period'       => $registrationPeriod,
             'period_unit'  => 'y',
             'authinfo'     => $api->generate_password($domain),
-            'hosts'        => $hosts, 
+            'hosts'        => $hosts,
             'contacts'     => $domain_view['contacts'],
             'autorenew'    => false
         ];
@@ -1351,29 +1339,31 @@ function dns_gateway_Sync($params)
         );
 
         // Grab Domain Info
-        $domain_list = $api->list_domains($domain);
-        $domain_view = $api->view_domain($domain_list[0]['wid']);
+        $domain_sync = $api->domain_sync($domain);
 
         // Build Return Result
         $result = [
-            'expirydate'        => $domain_view['expiry'],
+            'expirydate'        => null,
             'active'            => false,
             'expired'           => false,
             'transferredAway'   => false
         ];
 
-        $expiryTime  = strtotime($domain_view['expiry']);
+        if ( $domain_sync['detail'] == 'Not found.') {
+            $result['transferredAway'] = true;
+            return $result;
+        }
+
+        if (isset($domain_sync['expiry'])){
+
+            $result['expirydate'] = $domain_sync['expiry'];
+        }
+
+        $expiryTime  = strtotime($domain_sync['expiry']);
         $currentTime = strtotime(date("Y-m-d\TH:i:s\Z"));
 
-        if ($api_username != $domain_view['rar']) {
-            $result['transferredAway'] = true;
-        }
-        else if ($expiryTime > $currentTime) {
+        if ($expiryTime > $currentTime) {
             $result['active'] = true;
-
-            // Update auth key just to be sure that it's
-            // always correct (should standards change)
-            dns_gateway_Update_EPP_key($params);
         } else {
             $result['expired'] = true;
         }
@@ -1435,7 +1425,7 @@ function dns_gateway_Update_EPP_key($params)
             'hosts'         => $domain_view['hosts'],
             'contacts'      => $domain_view['contacts'],
             'autorenew'     => false
-        ];    
+        ];
         $api->update_domain($update_array, $domain_list[0]['wid']);
 
         return true;

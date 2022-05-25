@@ -330,6 +330,18 @@ class DNSAPI
     }
 
     /*
+     * Pulls Information about Current Domain
+     */
+
+    public function domain_sync($domain)
+    {
+        $url = $this->api_url . "/registry/WHMCS/domains/$domain/";
+        $result = $this->call($url, [], 'GET');
+
+        return $result;
+    }
+
+    /*
      * Locks selected domain
      *
      * will be unable to -
