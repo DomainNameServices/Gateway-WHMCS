@@ -56,4 +56,5 @@ For more information please refer to http://docs.whmcs.com/Domains_Configuration
 
 For support please contact support@dns.business
 
-_DNS Africa Ltd is a GBC1 private company incorporated in the Republic of Mauritius and Domain Name Services (Pty) Ltd is a private company incorporated and based in South Africa. These two organizations fall under the DNS.Business umbrella. Together we are a specialised team of domain industry experts committed to providing our registry and registrar partners and clients with highly adaptable, robust and cost effective software solutions. For more about DNS Business please visit www.dns.business._ 
+DNS Africa Ltd is a GBC1 private company incorporated in the Republic of Mauritius and Domain Name Services (Pty) Ltd is a private company incorporated 
+and based in South Africa. These two organizations fall under the DNS.Business umbrella. Together we are a specialised team of domain industry experts committed to providing our registry and registrar partners and clients with highly adaptable, robust and cost effective software solutions. For more about DNS Business please visit www.dns.business._ 
