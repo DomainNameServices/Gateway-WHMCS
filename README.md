@@ -21,13 +21,17 @@ cd /var/www/html/
 
 Download the DNS Gateway module
 ```
-sudo wget -O dns_gateway.zip https://github.com/DomainNameServices/Gateway-WHMCS/archive/refs/heads/master.zip
+sudo wget -O dns_gateway.zip https://github.com/DomainNameServices/Gateway-WHMCS/raw/master/dns_gateway.zip
+```
+or using curl
+```
+sudo curl -Lo dns_gateway.zip https://github.com/DomainNameServices/Gateway-WHMCS/raw/master/dns_gateway.zip
 ```
 ##### Step 3
 
 Extract the module 
 ```
-sudo unzip dns_gateway.zip
+sudo unzip -o dns_gateway.zip 
 ```
 
 ##### Step 4
