@@ -5,8 +5,8 @@
   "license": "proprietary",
   "category": "domains",
   "description": {
-    "name": "DNS Gateway",
-    "tagline": "Domain Management for Registrars and Resellers for more than 250 extensions"
+    "name": "DNS Gateway v3.0.8",
+    "tagline": "Need an account? Sign up here: <href a='https:\/\/portal.dns.business\/api\/signup'>portal.dns.business\/api\/signup<\/a>"
   },
   "logo": {
     "filename": "logo.png"
