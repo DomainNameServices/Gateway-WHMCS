@@ -3,16 +3,23 @@
   "type": "whmcs-registrars",
   "name": "dns_gateway",
   "license": "proprietary",
-  "category": "domains",
+  "category": "registrar",
   "description": {
-    "name": "DNS Gateway v3.0.10",
-    "tagline": "Need an account? Sign up here: <href a='https:\/\/portal.dns.business\/api\/signup'>portal.dns.business\/api\/signup<\/a>"
+    "name": "DNS Gateway v3.0.16",
+    "tagline": "Need an account? Sign up here: <href a='https:\/\/portal.dns.business\/api\/signup'>portal.dns.business\/api\/signup<\/a>",
+    "long": "Need an account? Sign up here: <href a='https:\/\/portal.dns.business\/api\/signup'>portal.dns.business\/api\/signup<\/a>",
+    "features": [
+      "Provide functionality for registering, transferring and renewing of domains"
+    ]
   },
   "logo": {
     "filename": "logo.png"
   },
   "support": {
+    "homepage": "https:\/\/dns.business\/",
+    "learn_more": "https:\/\/gateway.africa\/",
     "docs_url": "https:\/\/portal.dns.business\/",
+    "support_url": "https:\/\/dnsbusiness.atlassian.net\/servicedesk\/customer\/portal\/2\/group\/3\/create\/23",
     "email": "support@dns.business"
   },
   "authors": [
