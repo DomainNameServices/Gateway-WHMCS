@@ -1,359 +1,891 @@
-<?php //002cd
-if(extension_loaded('ionCube Loader')){die('The file '.__FILE__." is corrupted.\n");}echo("\nScript error: the ".(($cli=(php_sapi_name()=='cli')) ?'ionCube':'<a href="https://www.ioncube.com">ionCube</a>')." Loader for PHP needs to be installed.\n\nThe ionCube Loader is the industry standard PHP extension for running protected PHP code,\nand can usually be added easily to a PHP installation.\n\nFor Loaders please visit".($cli?":\n\nhttps://get-loader.ioncube.com\n\nFor":' <a href="https://get-loader.ioncube.com">get-loader.ioncube.com</a> and for')." an instructional video please see".($cli?":\n\nhttp://ioncu.be/LV\n\n":' <a href="http://ioncu.be/LV">http://ioncu.be/LV</a> ')."\n\n");exit(199);
-?>
-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
-OQ6805DM
+<?php
+    /*
+     * @copyright Copyright (c) DNS Africa 2023
+     * @author  David Peall <david@dns.business>
+     *
+     */
+    namespace WHMCS\Module\Registrar\dns_gateway;
+
+    use PHPUnit\Logging\Exception;
+    use function PHPUnit\Framework\isJson;
+    use function PHPUnit\Framework\lessThanOrEqual;
+
+    class DNSAPI
+    {
+        /**
+         * @var string
+         */
+        protected $username;
+        /**
+         * @var string
+         */
+        protected $password;
+        /**
+         * @var string
+         */
+        protected $epp_username;
+        /**
+         * @var string
+         */
+        protected $registry_api_url;
+        /**
+         * @var string
+         */
+        protected $portal_api_url;
+        /**
+         * @var string
+         */
+        protected $mode;
+        /**
+         * @var bool
+         */
+        public $debug=false;
+        /**
+         * @var bool
+         */
+        protected $curl_auth=true;
+        /**
+         * @var bool
+         */
+        protected $throw_http_error=true;
+        protected $curl_timeout=60;
+        protected $curl_connect_timeout=20;
+        protected $curl_followlocation=1;
+        protected $curl_sslverifypeer=true;
+        protected $curl_sslverifyhost=true;
+        /**
+         * @var mixed[]
+         */
+        protected $curl_headers = array(
+            'Content-Type: application/json'
+        );
+        /**
+         * @var string
+         */
+        protected $bearer = '';
+        protected $lock_statusses = [
+            'clientTransferProhibited',
+            'clientUpdateProhibited',
+        ];
+
+        public function __construct(array $params)
+        {
+            $this->username = $params["Portal_Username"];
+            $this->password = $params["Portal_Password"];
+            $this->mode = $params["AccountMode"];
+
+            if ($this->mode == 'live')
+            {
+                $this->registry_api_url = "https://srs-epp.dns.net.za/api/";
+                $this->portal_api_url = "https://srs-epp.dns.net.za/portal/";
+            } else {
+                $this->registry_api_url = "https://gateway-otande.dns.net.za:8443/api/";
+                $this->portal_api_url = "https://srs-epp.dns.net.za/portal/";
+            }
+
+            if (key_exists("debug", $params))
+                $this->debug = (bool)$params["debug"];
+
+            $this->doLogin();
+        }
+
+        function doLogin()
+        {
+            session_start();
+            if(isset($_SESSION['apitokentime']) or isset($_SESSION['appbearer']) or isset($_SESSION['appbearer'])) {
+                $dateTimeObject1 = date_create($_SESSION['apitokentime']);
+                $dateTimeObject2 = date_create(date('H:i:s'));
+                $interval = date_diff($dateTimeObject1, $dateTimeObject2);
+
+                $minutes = $interval->days * 24 * 60;
+                $minutes += $interval->h * 60;
+                $minutes += $interval->i;
+
+                # only valid for 24 hours so just shy of 1440
+                if ($minutes < 1400) {
+                    $this->bearer = $_SESSION['appbearer'];
+                    $this->epp_username = $_SESSION['epp_username'];
+                    return;
+                }
+            }
+
+            $login_details = array("username" => $this->username, "password" => $this->password);
+            $login = $this->postCH($this->portal_api_url."auth-jwt/", $login_details);
+            $this->bearer = $login['token'];
+            $this->epp_username = $this->getCH($this->portal_api_url."auth-epp-username/")["epp_username"];
+            $_SESSION['apitokentime']=date('H:i:s');
+            $_SESSION['appbearer']=$this->bearer;
+            $_SESSION['epp_username']=$this->epp_username;
+
+            syslog(LOG_DEBUG, "New API bearer token valid from: " . $_SESSION['apitokentime'] );
+        }
+
+        /**
+         * Prepare the basic curl object for the API call
+         * @param string $url
+         * @return resource
+         */
+        private function initCH(string $url)
+        {
+            $ch = curl_init();
+
+            $authorization = "Authorization: Bearer " . $this->bearer; // Prepare the authorisation token
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array($this->curl_headers, $authorization));
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->curl_sslverifypeer);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, $this->curl_sslverifyhost);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->curl_connect_timeout);
+            curl_setopt($ch, CURLOPT_TIMEOUT, $this->curl_timeout);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, $this->curl_followlocation);
+            curl_setopt($ch, CURLOPT_XOAUTH2_BEARER, $this->bearer);
+            curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+
+            return $ch;
+        }
+
+
+        /**
+         * Generic function to use a curl http DEL command on the RestAPI
+         * @param string $url - additional url information for the API call
+         * @return array dictionary of key value pairs containing the curl output and http_code
+         * @throws RestAPIException
+         */
+        protected function delCH($url): array
+        {
+            $ch = $this->initCH($url);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+            $output = $this->execCH($ch);
+
+            return $output;
+        }
+
+        /**
+         * Generic function to use a curl http GET command on the RestAPI
+         * @param string $url - additional url information for the API call
+         * @return array dictionary of key value pairs containing the curl output and http_code
+         * @throws RestAPIException
+         */
+        protected function getCH($url): array
+        {
+
+            $ch = $this->initCH($url);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+            $return = $this->execCH($ch);
+            if ($this->debug) {
+            //    logModuleCall('dns_gateway',"getdata",$url,$return);
+            }
+            return $return;
+        }
+
+        /**
+         * Generic function to use a curl http PUT command on the RestAPI
+         * @param string $url additional url information for the API call
+         * @param array $post_data dictionary of key/values to be posted
+         * @return array dictionary of key value pairs containing the curl output and http_code
+         * @throws RestAPIException
+         */
+        protected function putCH($url, $post_data): array
+        {
+            
+            $data_json = json_encode($post_data);
+            $authorization = "Authorization: Bearer " . $this->bearer; // Prepare the authorisation token
+            $curl_headers = array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data_json),
+                $authorization
+            );
+
+            $ch = $this->initCH($url);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $curl_headers);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
+
+            $return = $this->execCH($ch);
+
+            if($this->debug) 
+            {
+               // logModuleCall('dns_gateway',"putCH",$post_data,$return);
+            }
+            return $return;
+        }
+
+        /**
+         * Generic function to use a curl http POST command on the RestAPI
+         * @param string $url additional url information for the API call
+         * @param array $post_data dictionary of key/values to be posted
+         * @return array dictionary of key value pairs containing the curl output and http_code
+         * @throws RestAPIException
+         */
+        protected function postCH($url, $post_data): array
+        {
+            $authorization = "Authorization: Bearer " . $this->bearer; // Prepare the authorisation token
+            $ch = $this->initCH($url);
+
+            if(!empty($post_data))
+            {
+                $data_json = json_encode($post_data);
+                $curl_headers = array(
+                    'Content-Type: application/json',
+                    'Content-Length: ' . strlen($data_json),
+                    $authorization
+                );
+
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
+            }
+            else
+            {
+                $curl_headers = array(
+                    'Content-Type: application/json',
+                    $authorization
+                );
+            }
+            
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $curl_headers);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+
+            $return = $this->execCH($ch);
+            if ($this->debug) {
+                //logModuleCall('dns_gateway',"postCH".$url,$post_data,$return);
+            }
+            return $return;
+        }
+
+        /**
+         * This function executes the curl request
+         *
+         * @param $ch : Curl object
+         * @return string|array
+         * @throws RestAPIException
+         */
+        private function execCH($ch)
+        {
+            $verbose = NULL;
+            if ($this->debug) {
+                curl_setopt($ch, CURLOPT_VERBOSE, true);
+                curl_setopt($ch, CURLOPT_STDERR, $verbose = fopen('php://temp', 'rw+'));
+            }
+
+            $output = curl_exec($ch);
+            $response_code = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+
+            /** Add error to error log */
+            if ($this->debug) {
+                logModuleCall('dns_gateway',"execCH1", static::class . '::execCH >> ' .
+                    curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) . ' up:' .
+                    curl_getinfo($ch, CURLINFO_SIZE_UPLOAD) . ' down:' .
+                    curl_getinfo($ch, CURLINFO_SIZE_DOWNLOAD) .
+                    ' - ' . $response_code, $output);
+            }
+
+            if ($this->debug) {
+                logModuleCall('dns_gateway',"execCH2", static::class . '::execCH >> ' . $output . " Headers:" . curl_getinfo($ch, CURLINFO_HEADER_OUT ), $output);
+            }
+
+            syslog(LOG_DEBUG, "dns_gateway:". static::class . '::execCH >> ' .
+                curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) . ' up:' .
+                curl_getinfo($ch, CURLINFO_SIZE_UPLOAD) . ' down:' .
+                curl_getinfo($ch, CURLINFO_SIZE_DOWNLOAD) .
+                ' - ' . $response_code . ' : ' . $output);
+
+            $output = json_decode($output, true);
+
+            /** if the API is set to throw http errors then check for non 2xx response */
+            if ($this->throw_http_error && ($response_code < 200 || $response_code >= 300)){
+
+                /** If detail for error exists, add message to error */
+                if(isset($output['detail'])){
+
+                    throw new RestAPIException($output['detail'], $response_code, $output);
+                }else{
+                    if (is_array($output))
+                        $output_string = json_encode($output);
+                    else
+                        $output_string = $output;
+                    throw new RestAPIException("Error from the API ".curl_getinfo($ch, CURLINFO_EFFECTIVE_URL)." $response_code: $output_string", $response_code,
+                    $output);
+                }
+            }
+
+            $output['http_code'] = $response_code;
+
+            curl_close($ch);
+            return $output;
+        }
+
+        /**
+         * @param string $url
+         * @param int $limit
+         * @return mixed
+         * @throws RestAPIException
+         */
+        protected function _fetch_all(string $url, int $limit = 100)
+        {
+            /** Set the limit on the number of entries to get in one request the max is typically 100 */
+            $url .= '&limit=' . $limit;
+
+            $output = $this->getCH($url);
+
+            $count = intval($output['count']);
+
+            /** If there is more than $limit entries we need to fetch them in batches of $limit */
+            if ($count > $limit) {
+                $offset = 0;
+                while ($count > $offset) {
+                    $offset += $limit;
+                    $loop_url = $url . '&offset=' . $offset;
+                    $more = $this->getCH($loop_url);
+
+                    /** add the array to the collection for return */
+                    $output['results'] = array_merge($output['results'], $more['results']);
+                }
+            }
+            return $output['results'];
+        }
+
+        static private function endsWith(string $needle, string $haystack): bool
+        {
+            $length = strlen( $needle );
+            if( !$length ) {
+                return true;
+            }
+            return substr( $haystack, -$length ) === $needle;
+        }
+
+        /*
+         * Function generates a random password using the domain,
+         * username, and md5 encryption.
+         * We're also adding a # at the end,
+         * to ensure that all domain standards are met.
+         */
+        static public function generate_password($domain): string
+        {
+            // Generate
+            if (DNSAPI::endsWith('.na',$domain)) {
+                $epp_key = DNSAPI::RandomString(16);
+            } elseif (DNSAPI::endsWith('co.za',$domain))
+            {
+                $epp_key = 'coza';
+            } else {
+                $epp_key = DNSAPI::RandomString(16, true);
+            }
+            return $epp_key;
+        }
+
+        /*
+         * Function generates a random ID using
+         * the domain, username, and md5 encryption.
+         */
+        /**
+         * @param bool $use_special_chars
+         */
+        static public function RandomString($length, $use_special_chars = False): string
+        {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            if ($use_special_chars)
+                $characters .= "?!@#\$%^&*()";
+            $random_string = '';
+            while (strlen($random_string)<$length) {
+                $random_string .= $characters[rand(0, strlen($characters))];
+            }
+
+            // Ensure special characters are included.
+            if ($use_special_chars){
+                if (preg_match('/[a-zA-Z0-9]+$/', $random_string)){
+                    $random_string = DNSAPI::RandomString($length, $use_special_chars);
+                }
+            }
+            return $random_string;
+        }
+
+        public function generate_id($domain): string
+        {
+            return "DNS_GW_" . substr($domain, 0, 3) . DNSAPI::RandomString(6);
+        }
+
+        #Contact Operation
+
+        /*
+         * Create Contact
+         */
+
+        public function setcontact($contact_info)
+        {
+            $url = $this->registry_api_url . 'registry/contacts/';
+            $result = $this->postCH($url, $contact_info);
+            return $result['id'];
+        }
+
+        /*
+         * Update Existing Contact
+         */
+
+        public function update_contact($contact_info, $existing_id)
+        {
+            // Check For Existing Contact
+            $url = $this->registry_api_url . 'registry/contacts/' . $existing_id . '/';
+            $result = $this->putCH($url, $contact_info);
+            return true;
+        }
+
+        /*
+         * Pulls all Existing Contacts
+         */
+        public function contact_listing()
+        {
+            $url = $this->registry_api_url . 'registry/contacts/';
+            $result = $this->getCH($url);
+            return $result['wid'];
+        }
+
+        /*
+         * Get the conatcs wid id
+         */
+        public function get_contact_wid($contact_id)
+        {
+            $url = $this->registry_api_url . 'registry/contacts/?id=' . $contact_id;
+            $result = $this->getCH($url);
+            return $result['results'][0]['wid'];
+        }
+
+        /*
+         * Pulls a called contacts info
+         */
+        public function contact_info($contact_id): array
+        {
+            $wid = $this->get_contact_wid($contact_id);
+            $url = $this->registry_api_url . 'registry/contacts/' . $wid;
+            return $this->getCH($url);
+        }
+
+        /*
+         * Checks if a contact exists
+         */
+
+        public function contact_check($check, $contact_name = '')
+        {
+            $url = $this->registry_api_url . 'registry/contacts/check/' . $contact_name;
+            $result = $this->postCH($url, $check);
+            return $result['results'];
+        }
+
+        #Domain Operations
+
+        /*
+         * Registers a new domain
+         */
+
+        public function register_domain($domain_info)
+        {
+            $url = $this->registry_api_url . 'registry/domains/';
+            $result = $this->postCH($url, $domain_info);
+            return $result['wid'];
+        }
+
+        /*
+         * Pulls all Existing Domains
+         *  - Can Be Filtered By Domain Name
+         */
+
+        public function list_domains($domain_name = '')
+        {
+            $url = $this->registry_api_url.
+                    'registry/domains/'.
+                    ($domain_name!='' ? '?name=' . $domain_name : '');
+
+            $result = $this->getCH($url);
+            return $result['results'];
+        }
+
+        /*
+         * Pulls Domains Transferring In
+         *  - Can Be Filtered By Domain Name
+         */
+
+        public function list_domain_transfer_in($domain_name = '')
+        {
+            $url = $this->registry_api_url.
+                'registry/transfersin/'.
+                ($domain_name!='' ? '?name=' . $domain_name : '');
+
+            $result = $this->getCH($url);
+            return $result['results'];
+        }
+
+        /*
+         * Pulls Domains Transferring Out
+         *  - Can Be Filtered By Domain Name
+         */
+
+        public function list_domain_transfer_out($domain_name = '')
+        {
+            $url = $this->registry_api_url.
+                'registry/transfersout/'.
+                ($domain_name!='' ? '?name=' . $domain_name : '');
+
+            $result = $this->getCH($url);
+            return $result['results'];
+        }
+
+        /*
+         * Get's Domain's info
+         */
+
+        public function view_domain($domain_wid)
+        {
+            $url = $this->registry_api_url . 'registry/domains/' . $domain_wid;
+            $result = $this->getCH($url);
+            return $result;
+        }
+
+        /*
+         * Updates Existing Domain
+         */
+
+        public function update_domain($domain_info, $domain_id = '')
+        {
+            $url = $this->registry_api_url . 'registry/domains/' . $domain_id.'/';
+            $result = $this->putCH($url, $domain_info);
+            return $result['wid'];
+        }
+
+        /*
+         * Delete Existing domain
+         */
+
+        /**
+         * @throws RestAPIException
+         */
+        public function delete_domain($domain_id)
+        {
+            $url = $this->registry_api_url . 'registry/domains/' . $domain_id;
+            $result = $this->delCH($url);
+            if ($result["http_code"] >= 200 and $result["http_code"]  < 300)
+                return true;
+            else
+                if (key_exists("details", $result))
+                    throw new RestAPIException("Failed to delete domain: ". $result["details"], $result["http_code"], $result);
+                else
+                    throw new RestAPIException("Failed to delete domain: ", $result["http_code"], $result);
+        }
+
+        /*
+         */
+
+        /**
+         * Renew Existing Domain
+         *
+         * @param array $domain
+         * Required values
+         *                  'name' => Domain Name
+         *                  'curExpDate' => The current expiry date [yyyy-mm-dd] in UTC
+         * Optional values
+         *                  'period' => number of years,
+         *                  'period_unit' => 'y', for years
+         *
+         * @return int
+         * @throws RestAPIException
+         */
+        public function renew_domain($domain): int
+        {
+            $url = $this->registry_api_url . 'registry/WHMCS/domains/' . $domain["name"] . '/renew/';
+            $result = $this->postCH($url, $domain);
+            return (int)$result['wid'];
+        }
+
+        /*
+         * Transfers Existing domain
+         */
+
+        public function transfer_domain($domain)
+        {
+            $url = $this->registry_api_url . 'registry/domains/transfer-request/';
+            $result = $this->postCH($url, $domain);
+            return $result['name'];
+        }
+
+        /*
+         * Cancels Domain Transfer Request
+         */
+
+        public function cancel_domain_transfer($domain)
+        {
+            $url = $this->registry_api_url . 'registry/domains/transfer-cancel/';
+            $result = $this->postCH($url, $domain);
+            return true;
+        }
+
+        /*
+         * Reject Domain Transfer
+         */
+
+        public function reject_transfer_domain($domain)
+        {
+            $url = $this->registry_api_url.
+                    'registry/domains/'.
+                    $domain.
+                    '/transfer-reject/';
+
+            $result = $this->postCH($url, $domain);
+            return true;
+        }
+
+        /*
+         * Approve Domain Transfer
+         */
+
+        public function approve_transfer_domain($domain, $domain_id)
+        {
+            $url = $this->registry_api_url.
+                    'registry/domains/'.
+                    $domain_id .
+                    '/transfer-approve/';
+
+            $result = $this->postCH($url, $domain);
+            return true;
+        }
+
+        /**
+         * Pulls Information about Current Domain from the registry
+         * @param $domain
+         * @return mixed
+         * @throws RestAPIException
+         */
+        public function domain_info($domain)
+        {
+            $url = $this->registry_api_url . 'registry/domains/info/';
+            $result = $this->postCH($url, array("name" => $domain));
+
+            if ($this->epp_username != $result['results']['rar']) {
+                throw new RestAPIException('Domain owned by: ' . $result['results']['rar'], null);
+            }
+
+            return $result['results'];
+        }
+
+        /*
+         * Pulls Information about Current Domain
+         */
+
+        public function domain_sync($domain)
+        {
+            $url = $this->registry_api_url . "registry/WHMCS/domains/$domain/";
+
+            return $this->getCH($url);
+        }
+
+        /*
+         * Locks selected domain
+         *
+         * will be unable to -
+         * Update
+         * Delete
+         * or Transfer
+         */
+        /**
+         * @param string $domain_name
+         */
+        public function get_domain_wid($domain_name): int
+        {
+            $url = $this->registry_api_url . "registry/WHMCS/domains/$domain_name/wid/";
+            $result = $this->getCH($url);
+
+            return $result["wid"];
+        }
+
+        /**
+         * @param string $domain_name
+         */
+        public function get_domain_nameservers($domain_name): array
+        {
+            $url = $this->registry_api_url . "registry/WHMCS/domains/$domain_name/nameservers/";
+
+            return $this->getCH($url);
+        }
+
+        /*
+         * Check if the Domain exists
+         */
+
+        public function domain_check($domain)
+        {
+            $url = $this->registry_api_url . 'registry/domains/check/';
+            $result = $this->postCH($url, array("name" => $domain));
+            return $result;
+        }
+
+        /*
+         * Function checks if a Domain is locked or unlocked
+         */
+
+        public function check_domain_lock($domain)
+        {
+            // Grab Domain Info
+            $domain_arr = [
+                'name'       => $domain,
+                'authinfo'   => $this->generate_password($domain)
+            ];
+
+            $domain_info = $this->domain_info($domain_arr);
+            $locked = false;
+            foreach ($domain_info['statuses'] as $status) {
+                if (in_array($status['code'], $this->lock_statusses)) {
+                    $locked = true;
+                }
+            }
+
+            return $locked;
+        }
+
+
+        /*
+         * Manage Hosts
+         *
+         * Create, Update & Delete hosts
+         *
+         */
+
+
+        /*
+         * List Hosts
+         */
+
+        public function list_hosts($hostname = '')
+        {
+            $url = $this->registry_api_url.
+                    'registry/hosts/'.
+                    ($hostname!='' ? '?hostname=' . $hostname : '');
+
+            $result = $this->getCH($url);
+            return $result['results'];
+        }
+
+        /*
+         * Create Host
+         */
+
+        public function create_host($hostname, $ip, $ip_class = 'v4')
+        {
+            $url = $this->registry_api_url . 'registry/hosts/';
+
+            $host_record = [
+                'hostname'  => $hostname,
+                'glue'      => [
+                    [
+                        'ip'            => $ip,
+                        'class_field'   => $ip_class
+                    ]
+                ]
+            ];
+
+            $result = $this->postCH($url, $host_record);
+            return $result['wid'];
+        }
+
+        /*
+         * Update Host
+         */
+
+        public function update_host($wid, $hostname, $ip, $ip_class = 'v4')
+        {
+            $url = $this->registry_api_url . 'registry/hosts/' . $wid;
+
+            $host_record = [
+                'hostname'  => $hostname,
+                'glue'      => [
+                    [
+                        'ip'            => $ip,
+                        'class_field'   => $ip_class
+                    ]
+                ]
+            ];
+
+            $result = $this->putCH($url, $host_record);
+            return true;
+        }
+
+        /*
+         * Delete Host
+         */
+
+        public function delete_host($wid)
+        {
+            $url = $this->registry_api_url . 'registry/hosts/' . $wid;
+            $result = $this->delCH($url);
+            return true;
+        }
+
+        public function tld_pricing()
+        {
+            $url = $this->portal_api_url . 'billing/pricelist/?';
+            $result = $this->_fetch_all($url);
+            return $result;
+        }
+
+        public function suspend($domain)
+        {
+            $url = $this->registry_api_url . 'registry/WHMCS/domains/'.$domain.'/suspend/';
+            $result = $this->postCH($url,array());
+
+            if($result['http_code']==200)
+                return true;
+
+            return false;
+        }
+
+        public function unsuspend($domain)
+        {
+            $url = $this->registry_api_url . 'registry/WHMCS/domains/'.$domain.'/unsuspend/';
+            $result = $this->postCH($url,array());
+            
+            if($result['http_code']==200)
+                return true;
+
+            return false;
+        }
+
+        public function lock($domain)
+        {
+            $url = $this->registry_api_url . 'registry/WHMCS/domains/'.$domain.'/lock/';
+            $result = $this->postCH($url,array());
+
+            if($result['http_code']==200)
+                return true;
+
+            return false;
+        }
+
+        public function unlock($domain)
+        {
+            $url = $this->registry_api_url . 'registry/WHMCS/domains/'.$domain.'/unlock/';
+            $result = $this->postCH($url,array());
+
+            if($result['http_code']==200)
+                return true;
+
+            return false;
+        }
+
+        public function block($domain)
+        {
+            $url = $this->registry_api_url . 'registry/WHMCS/domains/'.$domain.'/block/';
+            $result = $this->postCH($url,array());
+
+            if($result['http_code']==200)
+                return true;
+
+            return false;
+        }
+
+        public function unblock($domain)
+        {
+            $url = $this->registry_api_url . 'registry/WHMCS/domains/'.$domain.'/unblock/';
+            $result = $this->postCH($url,array());
+
+            if($result['http_code']==200)
+                return true;
+
+            return false;
+        }
+    }
