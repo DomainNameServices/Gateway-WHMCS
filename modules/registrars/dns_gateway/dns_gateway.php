@@ -173,8 +173,20 @@
                         'province' => $params['state'],
                         'code' => $params['postcode'],
                         'country' => $params['countrycode'],
-                        'type' => 'int'
+                        'type' => 'loc'
                     ],
+                    [
+                        'real_name' => iconv("UTF-8", "ASCII//TRANSLIT", $params['fullname']),
+                        'org' => iconv("UTF-8", "ASCII//TRANSLIT", $params['companyname']),
+                        'street' => iconv("UTF-8", "ASCII//TRANSLIT", $params['address1']),
+                        'street2' => iconv("UTF-8", "ASCII//TRANSLIT", $params['address2']),
+                        'street3' => NULL,
+                        'city' => iconv("UTF-8", "ASCII//TRANSLIT", $params['city']),
+                        'province' => iconv("UTF-8", "ASCII//TRANSLIT", $params['state']),
+                        'code' => $params['postcode'],
+                        'country' => $params['countrycode'],
+                        'type' => 'int'
+                    ]
                 ]
             ];
 
@@ -196,8 +208,21 @@
                         'province' => $params['adminstate'],
                         'code' => $params['adminpostcode'],
                         'country' => $params['admincountry'],
-                        'type' => 'int'
+                        'type' => 'loc'
                     ],
+                    [
+                        'real_name' => iconv("UTF-8", "ASCII//TRANSLIT", $params['adminfirstname']) .
+                            ' ' . iconv("UTF-8", "ASCII//TRANSLIT", $params['adminlastname']),
+                        'org' => iconv("UTF-8", "ASCII//TRANSLIT", $params['admincompanyname']),
+                        'street' => iconv("UTF-8", "ASCII//TRANSLIT", $params['adminaddress1']),
+                        'street2' => iconv("UTF-8", "ASCII//TRANSLIT", $params['adminaddress2']),
+                        'street3' => NULL,
+                        'city' => iconv("UTF-8", "ASCII//TRANSLIT", $params['admincity']),
+                        'province' => iconv("UTF-8", "ASCII//TRANSLIT", $params['adminstate']),
+                        'code' => $params['adminpostcode'],
+                        'country' => $params['admincountry'],
+                        'type' => 'int'
+                    ]
                 ]
             ];
 
@@ -624,6 +649,19 @@
                             'code' => $new_details['Postcode'],
                             'country' => $new_details['Country'],
                             'type' => 'loc'
+                        ],
+                        [
+                            'real_name' => iconv("UTF-8", "ASCII//TRANSLIT", $new_details['First Name']) .
+                                ' ' . iconv("UTF-8", "ASCII//TRANSLIT", $new_details['Last Name']),
+                            'org' => iconv("UTF-8", "ASCII//TRANSLIT", $new_details['Company Name']),
+                            'street' => iconv("UTF-8", "ASCII//TRANSLIT", $new_details['Address 1']),
+                            'street2' => iconv("UTF-8", "ASCII//TRANSLIT", $new_details['Address 2']),
+                            'street3' => NULL,
+                            'city' => iconv("UTF-8", "ASCII//TRANSLIT", $new_details['City']),
+                            'province' => iconv("UTF-8", "ASCII//TRANSLIT", $new_details['State']),
+                            'code' => $new_details['Postcode'],
+                            'country' => $new_details['Country'],
+                            'type' => 'int'
                         ]
                     ]
                 ];
