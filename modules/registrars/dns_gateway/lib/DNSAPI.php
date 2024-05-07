@@ -92,7 +92,7 @@
         function doLogin()
         {
             session_start();
-            if(isset($_SESSION['apitokentime']) or isset($_SESSION['appbearer']) or isset($_SESSION['appbearer'])) {
+            if(isset($_SESSION['apitokentime']) and isset($_SESSION['appbearer']) and isset($_SESSION['epp_username'])) {
                 $dateTimeObject1 = date_create($_SESSION['apitokentime']);
                 $dateTimeObject2 = date_create(date('H:i:s'));
                 $interval = date_diff($dateTimeObject1, $dateTimeObject2);
@@ -102,7 +102,7 @@
                 $minutes += $interval->i;
 
                 # only valid for 24 hours so just shy of 1440
-                if ($minutes < 1400) {
+                if ($minutes < 60) {
                     $this->bearer = $_SESSION['appbearer'];
                     $this->epp_username = $_SESSION['epp_username'];
                     return;
@@ -296,7 +296,14 @@
 
                 /** If detail for error exists, add message to error */
                 if(isset($output['detail'])){
-
+                    # Re-authenticate and retry if the signature has expired
+                    if ($output['detail'] == 'Signature has expired.'){
+                        unset($_SESSION['apitokentime']);
+                        unset($_SESSION['appbearer']);
+                        unset($_SESSION['epp_username']);
+                        $this->doLogin();
+                        return $this->execCH($ch);
+                    }
                     throw new RestAPIException($output['detail'], $response_code, $output);
                 }else{
                     if (is_array($output))
