@@ -704,6 +704,12 @@
             return $this->getCH($url);
         }
 
+        public function get_domain_contacts($domain_name): array
+        {
+            $url = $this->registry_api_url . "registry/WHMCS/domains/$domain_name/contacts/";
+
+            return $this->getCH($url);
+        }
         /*
          * Check if the Domain exists
          */

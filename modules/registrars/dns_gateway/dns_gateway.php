@@ -624,8 +624,7 @@
 
 
             // Grab Domain Info
-            $domain_list = $api->list_domains($domain);
-            $domain_view = $api->view_domain($domain_list[0]['wid']);
+            $domain_view = $api->get_domain_contacts($domain);
 
             // Loop Contacts
             foreach ($domain_view['contacts'] as $contact) {
@@ -649,22 +648,15 @@
                             'code' => $new_details['Postcode'],
                             'country' => $new_details['Country'],
                             'type' => 'loc'
-                        ],
-                        [
-                            'real_name' => iconv("UTF-8", "ASCII//TRANSLIT", $new_details['First Name']) .
-                                ' ' . iconv("UTF-8", "ASCII//TRANSLIT", $new_details['Last Name']),
-                            'org' => iconv("UTF-8", "ASCII//TRANSLIT", $new_details['Company Name']),
-                            'street' => iconv("UTF-8", "ASCII//TRANSLIT", $new_details['Address 1']),
-                            'street2' => iconv("UTF-8", "ASCII//TRANSLIT", $new_details['Address 2']),
-                            'street3' => NULL,
-                            'city' => iconv("UTF-8", "ASCII//TRANSLIT", $new_details['City']),
-                            'province' => iconv("UTF-8", "ASCII//TRANSLIT", $new_details['State']),
-                            'code' => $new_details['Postcode'],
-                            'country' => $new_details['Country'],
-                            'type' => 'int'
                         ]
                     ]
                 ];
+
+/*                foreach ($contact_info['contact_address'][0] as $key => $contact_address) {
+                    if (strlen($contact_address) < 1){
+                        unset($contact_info['contact_address'][0][$key]);
+                    }
+                }*/
 
                 if (isset($new_details['Fax Number']) && !empty($new_details['Fax Number'])) {
                     $contact_info['fax'] = $new_details['Fax Number'];
@@ -818,9 +810,9 @@
             $api = new DNSAPI($params);
 
             if ($params['lockenabled'] == 'locked') {
-                $api->domain_lock($domain);
+                $api->lock($domain);
             } else {
-                $api->domain_unlock($domain);
+                $api->unlock($domain);
             }
 
         } catch (\Exception $e) {
@@ -1555,9 +1547,9 @@
         }
 
         if ($domain_lock == true) {
-            $buttonarray['Unlock Domain'] = 'Unlock_Domain';
+            $buttonarray['Unlock Transfers'] = 'Unlock_Domain';
         } else {
-            $buttonarray['Lock Domain'] = 'Lock_Domain';
+            $buttonarray['Lock Transfers'] = 'Lock_Domain';
         }
 
         if ($domain_suspend == true) {
@@ -1567,9 +1559,9 @@
         }
 
         if ($domain_block == true) {
-            $buttonarray['Unblock Domain'] = 'Unblock_Domain';
+            $buttonarray['Unblock Updates'] = 'Unblock_Domain';
         } else {
-            $buttonarray['Block Domain'] = 'Block_Domain';
+            $buttonarray['Block Updates'] = 'Block_Domain';
         }
 
 
