@@ -844,8 +844,9 @@
                 $tld != 'org.za' &&
                 $tld != 'web.za'
             ) {
+                $dnsapi = new DNSAPI($params);
                 // Call api
-                $values["eppcode"] = DNSAPI::generate_password($domain);
+                $values["eppcode"] = $dnsapi->domain_info($domain)["authinfo"];
 
                 return $values;
             } else {
