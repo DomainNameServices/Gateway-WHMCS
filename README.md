@@ -58,6 +58,15 @@ For additional information, refer to the [WHMCS Domain Configuration Guide](http
 
 For support, please contact [support@dns.business](mailto:support@dns.business).
 
+## Registrar TLD Sync
+
+1. Navigate to **Utilities** > **Registrar TLD Sync**.
+2. Select **DNS Gateway**.
+   ![tld_price_sync.png](tld_price_sync.png)
+3. Enable **Automatic Registration** and set the mark up and rounding options required
+4. Select desired TLDs to import or go to the last tab and select all
+   ![tld_price_sync_2.png](tld_price_sync_2.png)
+
 ### About Us
 
 DNS Africa Ltd is a GBC1 private company incorporated in Mauritius, and Domain Name Services (Pty) Ltd is a private company based in South Africa. As part of the DNS.Business group, we are a team of domain industry experts dedicated to providing robust, adaptable, and cost-effective software solutions. Learn more about us at [www.dns.business](http://www.dns.business).
